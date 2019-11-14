@@ -1,6 +1,8 @@
 package dev.java2dgame.ui;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 public abstract class UIObject {
 	
@@ -20,16 +22,20 @@ public abstract class UIObject {
 	
 	public abstract void tick();
 	
-	public abstract void render();
+	public abstract void render(Graphics g);
 	
 	public abstract void onClick();
 	
-	public void onMouseMove() {
-		
+	public void onMouseMove(MouseEvent e) {
+		if (hitbox.contains(e.getX(), e.getY()))
+			hovering = true;
+		else
+			hovering = false;
 	}
 	
-	public void onMouseRelease() {
-		
+	public void onMouseRelease(MouseEvent e) {
+		if (hovering)
+			onClick();
 	}
 
 }

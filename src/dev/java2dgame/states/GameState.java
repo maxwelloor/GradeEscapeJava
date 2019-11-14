@@ -2,17 +2,20 @@ package dev.java2dgame.states;
 
 import java.awt.Graphics;
 
-import dev.java2dgame.gfx.Assets;
-import dev.java2dgame.gfx.Dialogue;
 import dev.java2dgame.main.Handler;
-import dev.java2dgame.tiles.Tile;
+import dev.java2dgame.ui.UIManager;
 import dev.java2dgame.worlds.World;
 
 public class GameState extends State{
 	
+	private UIManager uiManager;
+	
 	public GameState(Handler handler) {
 		super(handler);
 		handler.setWorld(new World(handler, "1"));
+		
+		uiManager = new UIManager(handler);
+		handler.getMouseManager().setUiManager(uiManager);
 	}
 
 	@Override
