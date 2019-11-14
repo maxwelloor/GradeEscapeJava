@@ -2,6 +2,7 @@ package dev.java2dgame.main;
 
 import dev.java2dgame.gfx.GameCamera;
 import dev.java2dgame.input.KeyManager;
+import dev.java2dgame.input.MouseManager;
 import dev.java2dgame.window.Window;
 import dev.java2dgame.worlds.World;
 
@@ -20,6 +21,10 @@ public class Handler {
 	
 	public KeyManager getKeyManager() {
 		return game.getKeyManager();
+	}
+	
+	public MouseManager getMouseManager() {
+		return game.getMouseManager();
 	}
 	
 	public Window getWindow() {
@@ -49,7 +54,5 @@ public class Handler {
 	public void setWorld(World world) {
 		this.world = world;
 	}
-	
-	
 
 }

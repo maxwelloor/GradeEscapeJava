@@ -2,10 +2,9 @@ package dev.java2dgame.gfx;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-
-import javax.swing.JLabel;
-
 import dev.java2dgame.tiles.Tile;
+
+// TODO add more tiles.
 
 public class Assets {
 	
@@ -57,7 +56,7 @@ public class Assets {
 		dialogueFont = Fonts.loadFont("/fonts/munro.ttf", 48);
 		testFont = new Font("arial", Font.PLAIN, 32);
 		
-		// Misc
+		// UI
 		interact_mark = ImageLoader.loadImage("/sprites/ui/interact_mark.png");
 		
 		// Tile stuff.

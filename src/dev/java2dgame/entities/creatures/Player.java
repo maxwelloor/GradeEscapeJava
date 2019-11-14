@@ -28,6 +28,9 @@ public class Player extends Creature {
 		leftAnim = new Animation(80, Assets.player_left);
 	}
 	
+	// TODO Add sprinting
+	// TODO add sprint bar
+	
 	public void tick() {
 		tickAnimations();
 		

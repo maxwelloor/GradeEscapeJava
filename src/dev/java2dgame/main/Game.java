@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.gfx.GameCamera;
 import dev.java2dgame.input.KeyManager;
+import dev.java2dgame.input.MouseManager;
 import dev.java2dgame.states.GameState;
 import dev.java2dgame.states.MenuState;
 import dev.java2dgame.states.PerronFightState;
@@ -33,6 +34,7 @@ public class Game implements Runnable {
 	
 	// Input
 	private KeyManager keyManager;
+	private MouseManager mouseManager;
 	
 	// Camera
 	private GameCamera gameCamera;
@@ -46,6 +48,7 @@ public class Game implements Runnable {
 		this.title = title;
 		
 		keyManager = new KeyManager();
+		mouseManager = new MouseManager();
 	}
 	
 	private void init() {
@@ -122,6 +125,24 @@ public class Game implements Runnable {
 		stop();
 	}
 	
+	public synchronized void start() {
+		if(running)
+			return;
+		
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	public synchronized void stop() {
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
@@ -142,21 +163,8 @@ public class Game implements Runnable {
 		return window;
 	}
 	
-	public synchronized void start() {
-		if(running)
-			return;
-		
-		running = true;
-		thread = new Thread(this);
-		thread.start();
-	}
-	
-	public synchronized void stop() {
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public MouseManager getMouseManager() {
+		return mouseManager;
 	}
 	
 }
