@@ -68,6 +68,7 @@ public class Player extends Creature {
 		getInput();
 		move();
 		handler.getGameCamera().centerOnEntity(this);
+		tickAnimations();
 		
 		// Quest stuff
 		if (currentQuest.isQuestDone()) {
@@ -87,8 +88,6 @@ public class Player extends Creature {
 			speed = Creature.DEFAULT_SPEED;
 			currentAnims = defaultAnims;
 		}
-		
-		tickAnimations();
 		
 		// Sprinting stuff over.
 		
@@ -126,7 +125,11 @@ public class Player extends Creature {
 			xMove = +speed;
 		
 		if (handler.getKeyManager().shift && !staminaBarEmpty && !isTired) {
-			isSprinting = true;
+			// Makes is so the player wont be sprinting if the shift key is held but the player is still.
+			if (xMove != 0 || yMove != 0)
+				isSprinting = true;
+			else
+				isSprinting = false;
 		} else {
 			isSprinting = false;
 		}
