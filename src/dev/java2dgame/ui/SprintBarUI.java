@@ -42,7 +42,7 @@ public class SprintBarUI extends UIObject {
 		} else {
 			if (barHeight < SPRINT_BAR_HEIGHT_DEFAULT) {
 				
-				if (SPRINT_BAR_HEIGHT_DEFAULT/2 < barHeight)
+				if (SPRINT_BAR_HEIGHT_DEFAULT - 5 < barHeight)
 					handler.getWorld().getEntityManager().getPlayer().setTired(false);
 				
 				handler.getWorld().getEntityManager().getPlayer().setStaminaBarEmpty(false);

@@ -14,7 +14,9 @@ public class Player extends Creature {
 
 	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
 	
-	private Animation idleAnim, downAnim, upAnim, rightAnim, leftAnim;
+	private Animation idleAnim;
+	private Animation[] defaultAnims, sprintingAnims, tiredAnims, currentAnims;
+	
 	private Quest currentQuest;
 	private boolean isSprinting, canInteract, staminaBarEmpty, isTired;
 
@@ -26,11 +28,34 @@ public class Player extends Creature {
 		hitbox.width = 44;
 		hitbox.height = 45;
 		
-		downAnim = new Animation(90, Assets.player_down);
-		upAnim = new Animation(90, Assets.player_up);
+		// Player idle animation.
 		idleAnim = new Animation(333, Assets.player_standing);
-		rightAnim = new Animation(80, Assets.player_right);
-		leftAnim = new Animation(80, Assets.player_left);
+		
+		// ALL PLAYER ANIMATIONS
+		defaultAnims = new Animation[]{
+		new Animation(110, Assets.player_down),
+		new Animation(110, Assets.player_up),
+		new Animation(100, Assets.player_right),
+		new Animation(100, Assets.player_left)
+		};
+		
+		// TIRED ANIMATIONS
+		tiredAnims = new Animation[] {
+		new Animation(150, Assets.player_down),
+		new Animation(150, Assets.player_up),
+		new Animation(150, Assets.player_right),
+		new Animation(150, Assets.player_left)
+		};
+		
+		// SPRINTING ANIMATIONS.
+		sprintingAnims = new Animation[] {
+		new Animation(60, Assets.player_down),
+		new Animation(60, Assets.player_up),
+		new Animation(60, Assets.player_right),
+		new Animation(60, Assets.player_left)
+		};
+		
+		currentAnims = defaultAnims;
 		
 		isSprinting = false;
 		canInteract = false;
@@ -39,12 +64,7 @@ public class Player extends Creature {
 		currentQuest = new PlaceholderQuest(handler, "I", "am");
 	}
 	
-	// TODO Add sprinting
-	// TODO add sprint bar
-	
 	public void tick() {
-		tickAnimations();
-		
 		getInput();
 		move();
 		handler.getGameCamera().centerOnEntity(this);
@@ -56,12 +76,20 @@ public class Player extends Creature {
 		// Quest stuff over.
 		
 		// Sprinting stuff.
-		if (isTired)
+		if (isTired) {
 			speed = DEFAULT_TIRED_SPEED;
-		else if (isSprinting)
+			currentAnims = tiredAnims;
+		}  
+		else if (isSprinting) {
 			speed = DEFAULT_SPRINT_SPEED;
-		else
+			currentAnims = sprintingAnims;
+		} else {
 			speed = Creature.DEFAULT_SPEED;
+			currentAnims = defaultAnims;
+		}
+		
+		tickAnimations();
+		
 		// Sprinting stuff over.
 		
 		// Checking to see if the player is in range to interact with anything.
@@ -107,27 +135,34 @@ public class Player extends Creature {
 	
 	public void render(Graphics g) {
 		if (canInteract)
-			g.drawImage(Assets.interact_mark, (int) (x - handler.getGameCamera().getxOffset() + getCurrentAnimationFrame().getWidth()/2 - Assets.interact_mark.getWidth()/2), (int) (y - handler.getGameCamera().getyOffset()) - Assets.interact_mark.getHeight() - 10, null);
-		g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
+			g.drawImage(Assets.interact_mark, (int) (x - handler.getGameCamera().getxOffset() + getCurrentAnimationFrame(currentAnims).getWidth()/2 - Assets.interact_mark.getWidth()/2), (int) (y - handler.getGameCamera().getyOffset()) - Assets.interact_mark.getHeight() - 10, null);
+		
+		g.drawImage(getCurrentAnimationFrame(currentAnims), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
 	}
 	
 	private void tickAnimations() {
-		upAnim.tick();
-		downAnim.tick();
-		rightAnim.tick();
-		leftAnim.tick();
+		
 		idleAnim.tick();
+		
+		for (Animation dAnim : defaultAnims)
+			dAnim.tick();
+		
+		for (Animation sAnim : sprintingAnims)
+			sAnim.tick();
+		
+		for (Animation tAnim : tiredAnims)
+			tAnim.tick();
 	}
 	
-	private BufferedImage getCurrentAnimationFrame() {
+	private BufferedImage getCurrentAnimationFrame(Animation[] animSet) {
 		if (xMove < 0) {
-			return leftAnim.getCurrentFrame();
+			return animSet[3].getCurrentFrame(); // left
 		} else if (xMove > 0) {
-			return rightAnim.getCurrentFrame();
+			return animSet[2].getCurrentFrame(); // right
 		} else if (yMove < 0) {
-			return upAnim.getCurrentFrame();
+			return animSet[1].getCurrentFrame(); // up
 		} else if (yMove > 0) {
-			return downAnim.getCurrentFrame();
+			return animSet[0].getCurrentFrame(); // down
 		} else {
 			return idleAnim.getCurrentFrame();
 		}
