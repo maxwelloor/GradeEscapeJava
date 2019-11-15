@@ -42,6 +42,8 @@ public class Teacher extends StaticEntity {
 		if (showingDialogue) {
 			checkForDialogueEnd(getCurrentDialogue());
 		}
+		
+		standingAnim.tick();
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class GameState extends State{
 		super(handler);
 		handler.setWorld(new World(handler, "1"));
 		
+		
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUiManager(uiManager);
 		handler.getMouseManager().getUiManager().addObject(new SprintBarUI(handler));
