@@ -7,11 +7,16 @@ import dev.java2dgame.entities.Entity;
 import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
+import dev.java2dgame.quests.PlaceholderQuest;
+import dev.java2dgame.quests.Quest;
 
 public class Player extends Creature {
+
+	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
 	
 	private Animation idleAnim, downAnim, upAnim, rightAnim, leftAnim;
-	private boolean canInteract;
+	private Quest currentQuest;
+	private boolean isSprinting, canInteract, staminaBarEmpty, isTired;
 
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y);
@@ -26,6 +31,12 @@ public class Player extends Creature {
 		idleAnim = new Animation(333, Assets.player_standing);
 		rightAnim = new Animation(80, Assets.player_right);
 		leftAnim = new Animation(80, Assets.player_left);
+		
+		isSprinting = false;
+		canInteract = false;
+		staminaBarEmpty = false;
+		
+		currentQuest = new PlaceholderQuest(handler, "I", "am");
 	}
 	
 	// TODO Add sprinting
@@ -37,6 +48,21 @@ public class Player extends Creature {
 		getInput();
 		move();
 		handler.getGameCamera().centerOnEntity(this);
+		
+		// Quest stuff
+		if (currentQuest.isQuestDone()) {
+			currentQuest.finished();
+		}
+		// Quest stuff over.
+		
+		// Sprinting stuff.
+		if (isTired)
+			speed = DEFAULT_TIRED_SPEED;
+		else if (isSprinting)
+			speed = DEFAULT_SPRINT_SPEED;
+		else
+			speed = Creature.DEFAULT_SPEED;
+		// Sprinting stuff over.
 		
 		// Checking to see if the player is in range to interact with anything.
 		boolean inInteractRange = false;
@@ -55,6 +81,7 @@ public class Player extends Creature {
 		
 		if (!inInteractRange)
 			canInteract = false;
+		// Interact over.
 	}
 	
 	private void getInput() {
@@ -69,6 +96,13 @@ public class Player extends Creature {
 			xMove = -speed;
 		if (handler.getKeyManager().right)
 			xMove = +speed;
+		
+		if (handler.getKeyManager().shift && !staminaBarEmpty && !isTired) {
+			isSprinting = true;
+		} else {
+			isSprinting = false;
+		}
+		
 	}
 	
 	public void render(Graphics g) {
@@ -105,6 +139,38 @@ public class Player extends Creature {
 
 	public void setCanInteract(boolean canInteract) {
 		this.canInteract = canInteract;
+	}
+
+	public Quest getCurrentQuest() {
+		return currentQuest;
+	}
+
+	public void setCurrentQuest(Quest quest) {
+		this.currentQuest = currentQuest;
+	}
+	
+	public void setSprinting(boolean sprinting) {
+		this.isSprinting = sprinting;
+	}
+	
+	public boolean getSprinting() {
+		return this.isSprinting;
+	}
+
+	public void setStaminaBarEmpty(boolean staminaBarEmpty) {
+		this.staminaBarEmpty = staminaBarEmpty;
+	}
+	
+	public boolean isStaminaBarEmpty() {
+		return staminaBarEmpty;
+	}
+
+	public boolean isTired() {
+		return isTired;
+	}
+
+	public void setTired(boolean isTired) {
+		this.isTired = isTired;
 	}
 	
 	

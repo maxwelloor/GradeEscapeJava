@@ -15,8 +15,7 @@ public class Tile {
 	public static Tile classFloorTile1 = new ClassroomFloorTile1();
 	public static Tile classFloorTile2 = new ClassroomFloorTile2();
 	public static Tile classFloorTile3 = new ClassroomFloorTile3();
-	public static Tile hallFloorTile1 = new HallFloorTile1();
-	public static Tile hallFloorTile2 = new HallFloorTile2();
+	public static Tile hallFloorTile = new HallFloorTile();
 	public static Tile frontWallTile = new FrontWallTile();
 	public static Tile rightWallTile = new RightWallTile();
 	public static Tile leftWallTile = new LeftWallTile();
@@ -28,6 +27,11 @@ public class Tile {
 	public static Tile bookshelfTile2 = new BookshelfTile2();
 	public static Tile openWindowTile = new OpenWindowTile();
 	public static Tile closedWindowTile = new ClosedWindowTile();
+	public static Tile gymWallFrontTile = new GymWallFrontTile();
+	public static Tile gymWallLeftTile = new GymWallLeftTile();
+	public static Tile gymWallRightTile = new GymWallRightTile();
+	public static Tile bathroomFloorTile = new BathroomFloorTile();
+	public static Tile audStageTile = new AudStageTile();
 	
 	
 	// CLASS STUFF
@@ -68,12 +72,12 @@ public class Tile {
 	}
 	
 	public static void printIds() {
-		try {
-			for (Tile t : tiles) {
-				System.out.println(t.getClass().getSimpleName() + ": " + t.id);
-			}		
-		} catch(NullPointerException e) {
-			return;
-		}
+		for (int x = 0; x < tiles.length; x++) {
+			
+			if (tiles[x] == null)
+				return;
+			
+			System.out.println(tiles[x].getClass().getSimpleName() + ": " + tiles[x].id);
+		}		
 	}
 }

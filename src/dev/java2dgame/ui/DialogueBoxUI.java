@@ -1,27 +1,31 @@
-package dev.java2dgame.gfx;
+package dev.java2dgame.ui;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import dev.java2dgame.gfx.Assets;
+import dev.java2dgame.gfx.Fonts;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.utils.Utils;
 
-public class Dialogue {
+public class DialogueBoxUI extends UIObject{
 	
 	private static int boxHeight = 250, totalEdgeGap = 50, textGap = 20, loopsToTick = 2;
 	private static Font font = Assets.dialogueFont;
 	
-	private int boxX, boxY, boxWidth, loops;
 	private Handler handler;
+	private int boxX, boxY, boxWidth, loops;
 	private boolean buildingBox;
 	private String fullText;
 	private ArrayList<ArrayList<String>> lines, displayLines;
 	private int currentLine, currentLetterIndex;
 	
-	public Dialogue(Handler handler, String text) {
+	public DialogueBoxUI(Handler handler, String text) {
+		// In this case these variables mean nothing to the super-class.
+		super(0, 0, 0, 0);
+		
 		this.handler = handler;
 		this.fullText = text;
 		
@@ -30,7 +34,7 @@ public class Dialogue {
 		this.displayLines.add(new ArrayList<String>());
 		this.currentLine = 0;
 		this.currentLetterIndex = -1;
-		this.boxWidth = handler.getWidth() - Dialogue.totalEdgeGap;
+		this.boxWidth = handler.getWidth() - totalEdgeGap;
 		this.boxX = totalEdgeGap/2 - 4; // the -4 is an offset to make it centered because its not for some reason.
 		this.boxY = handler.getHeight() - totalEdgeGap - boxHeight;
 
@@ -38,6 +42,7 @@ public class Dialogue {
 		this.buildingBox = true;
 	}
 	
+	@Override
 	public void tick() {
 		
 		// only adds stuff onto the end of the box if the buildingBox variable is true.
@@ -65,6 +70,7 @@ public class Dialogue {
 		}	
 	}
 	
+	@Override
 	public void render(Graphics g) {
 		// Drawing the box
 		g.setColor(Color.black);
@@ -89,6 +95,11 @@ public class Dialogue {
 			
 			yCord += Fonts.getFontHeight(font);
 		}
+	}
+	
+	@Override
+	public void onClick() {
+		
 	}
 	
 	private ArrayList<ArrayList<String>> buildLines() {

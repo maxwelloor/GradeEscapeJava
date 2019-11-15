@@ -4,58 +4,60 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import dev.java2dgame.entities.creatures.Creature;
-import dev.java2dgame.gfx.Dialogue;
+import dev.java2dgame.gfx.Animation;
+import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
+import dev.java2dgame.ui.DialogueBoxUI;
 
 public class Teacher extends StaticEntity {
 	
-	private boolean showDialogue = false;
-	private Dialogue[] dialogues = {new Dialogue(handler, "Hey there kid. If you want my key you are gonna have to   try to beat me in an arm wrestle. You wanna try?")};
+	private boolean showingDialogue = false;
+	private DialogueBoxUI[] dialogues;
 	private int currentDialogue = 0;
+	private Animation standingAnim;
 
-	public Teacher(Handler handler, float x, float y) {
+	public Teacher(Handler handler, float x, float y, int id) {
 		super(handler, x, y);
 		
 		this.interactible = true;
 		hitbox.width = 64;
 		hitbox.height = 64;
+		
+		// Mr Breaton.
+		if (id == 0) {
+			standingAnim = new Animation(500, Assets.mr_breaton);
+			dialogues = new DialogueBoxUI[] {new DialogueBoxUI(handler, "Hey I'm a garbage teacher"), new DialogueBoxUI(handler, "Nice to see you")};
+		}
 	}
 
 	@Override
 	public void tick() {
 		// Checks for the player interacting with the teacher
-		if (checkForPlayerInteract(handler.getWorld().getEntityManager().getPlayer()) && !showDialogue) {
+		if (checkForPlayerInteract(handler.getWorld().getEntityManager().getPlayer()) && !showingDialogue) {
 			getCurrentDialogue().setBuilding(true);
-			showDialogue = true;
+			handler.getMouseManager().getUiManager().addObject(getCurrentDialogue());
+			showingDialogue = true;
 		}
 		
-		if (showDialogue) {
-			getCurrentDialogue().tick();
+		if (showingDialogue) {
 			checkForDialogueEnd(getCurrentDialogue());
 		}
-		
-		if (!getCurrentDialogue().isBuilding() && handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE))
-			showDialogue = false;
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), 64, 64);
-		
-		if (showDialogue)
-			getCurrentDialogue().render(g);
+		g.drawImage(standingAnim.getCurrentFrame(), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
 	}
 	
-	private Dialogue getCurrentDialogue() {
+	private DialogueBoxUI getCurrentDialogue() {
 		return dialogues[currentDialogue];
 	}
 	
-	private void checkForDialogueEnd(Dialogue d) {
+	private void checkForDialogueEnd(DialogueBoxUI d) {
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !d.isBuilding()) {
-			showDialogue = false;
+			showingDialogue = false;
 			d.reset();
+			handler.getMouseManager().getUiManager().removeObject(d);
 			
 			if (currentDialogue < dialogues.length - 1)
 				currentDialogue++;

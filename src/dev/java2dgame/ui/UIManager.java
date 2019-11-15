@@ -11,7 +11,6 @@ public class UIManager {
 	private Handler handler;
 	private ArrayList<UIObject> objects;
 	
-	
 	public UIManager(Handler handler) {
 		this.handler = handler;
 		this.objects = new ArrayList<UIObject>();

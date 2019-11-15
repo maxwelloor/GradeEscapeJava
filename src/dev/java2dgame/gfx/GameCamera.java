@@ -1,7 +1,6 @@
 package dev.java2dgame.gfx;
 
 import dev.java2dgame.entities.Entity;
-import dev.java2dgame.main.Game;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.tiles.Tile;
 

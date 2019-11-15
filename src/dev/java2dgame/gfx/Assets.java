@@ -14,19 +14,25 @@ public class Assets {
 	public static Font dialogueFont, testFont;
 
 	// TILES
-	public static BufferedImage nothing, hall_floor1, hall_floor2, aud_floor, gym_floor,
-	classroom_floor1, classroom_floor2, classroom_floor3, front_wall, 
-	left_wall, right_wall, shelf_wall, whiteboard_wall, closed_window,
-	open_window, bookshelf1, bookshelf2, lockers, door;
+	public static BufferedImage nothing, hall_floor, aud_floor, gym_floor,
+	gym_wall_front, gym_wall_right, gym_wall_left, classroom_floor1, classroom_floor2,
+	classroom_floor3, front_wall, left_wall, right_wall, shelf_wall, whiteboard_wall, 
+	closed_window, open_window, bookshelf1, bookshelf2, lockers, door, bathroom_floor,
+	aud_stage;
 	// TILES DONE
 	
-	// ENTITIES
+	// STATIC ENTITIES
 	public static BufferedImage saw, wooden_table, computer_monitor;
-	
 	// ENTITIES DONE
+	
+	//TEACHERS
+	public static SpriteSheet mr_breaton_sheet, mr_kitchen_sheet, mr_witterick_sheet, mr_watson_sheet;
+	public static BufferedImage[] mr_breaton, mr_kitchen, mr_witterick, mr_watson;
+	// TEACHERS DONE
+	
 	public static BufferedImage[] player_down, player_up, player_right, player_left, player_standing;
 	
-	// MISC
+	// UI
 	public static BufferedImage interact_mark;
 	
 	//SPRITE SHEETS
@@ -35,11 +41,11 @@ public class Assets {
 	
 	public static void init() {
 		// Player Stuff
-		playerRunDownSheet = new SpriteSheet("/sprites/players/player_run_foreward.png");
-		playerRunUpSheet = new SpriteSheet("/sprites/players/player_run_back.png");
-		playerRunLeftSheet = new SpriteSheet("/sprites/players/player_run_left.png");
-		playerRunRightSheet = new SpriteSheet("/sprites/players/player_run_right.png");
-		playerStandingSheet = new SpriteSheet("/sprites/players/player_standing.png");
+		playerRunDownSheet = new SpriteSheet("/sprites/entities/people/player_run_foreward.png");
+		playerRunUpSheet = new SpriteSheet("/sprites/entities/people/player_run_back.png");
+		playerRunLeftSheet = new SpriteSheet("/sprites/entities/people/player_run_left.png");
+		playerRunRightSheet = new SpriteSheet("/sprites/entities/people/player_run_right.png");
+		playerStandingSheet = new SpriteSheet("/sprites/entities/people/player_standing.png");
 		
 		player_down = playerRunDownSheet.getPlayerList(1, 7, 44, 86);
 		player_right = playerRunRightSheet.getPlayerList(1, 8, 48, 100);
@@ -48,9 +54,20 @@ public class Assets {
 		player_up = playerRunUpSheet.getPlayerList(1, 7, 44, 86);
 		
 		// Entities.
-		saw = ImageLoader.loadImage("/sprites/entities/woodshop_saw.png");
-		wooden_table = ImageLoader.loadImage("/sprites/entities/wooden_table.png");
-		computer_monitor = ImageLoader.loadImage("/sprites/entities/computer_monitor.png");
+		saw = ImageLoader.loadImage("/sprites/entities/statics/woodshop_saw.png");
+		wooden_table = ImageLoader.loadImage("/sprites/entities/statics/wooden_table.png");
+		computer_monitor = ImageLoader.loadImage("/sprites/entities/statics/computer_monitor.png");
+		
+		// Teachers.
+		mr_breaton_sheet = new SpriteSheet("/sprites/entities/people/teachers/mr_breaton.png");
+		mr_kitchen_sheet = new SpriteSheet("/sprites/entities/people/teachers/mr_kitchen.png");
+		mr_watson_sheet = new SpriteSheet("/sprites/entities/people/teachers/mr_watson.png");
+		mr_witterick_sheet = new SpriteSheet("/sprites/entities/people/teachers/mr_watson.png");
+		
+		mr_breaton = mr_breaton_sheet.getPlayerList(1, 2, 22, 40);
+		mr_witterick = mr_witterick_sheet.getPlayerList(1, 2, 22, 40);
+		mr_watson = mr_watson_sheet.getPlayerList(1, 2, 22, 22);
+		mr_kitchen = mr_kitchen_sheet.getPlayerList(1, 2, 24, 26);
 		
 		//Fonts.
 		dialogueFont = Fonts.loadFont("/fonts/munro.ttf", 48);
@@ -70,8 +87,6 @@ public class Assets {
 		door = tileSheet.crop(tWidth, tHeight * 2, tWidth, tHeight);
 		aud_floor = tileSheet.crop(tWidth * 2, 0, tWidth, tHeight);
 		gym_floor = tileSheet.crop(tWidth * 2, tHeight, tWidth, tHeight);
-		hall_floor1 = tileSheet.crop(tWidth * 2, tHeight * 2, tWidth, tHeight);
-		hall_floor2 = tileSheet.crop(tWidth * 3, 0, tWidth, tHeight);
 		lockers = tileSheet.crop(tWidth * 3, tHeight, tWidth, tHeight);
 		nothing = tileSheet.crop(tWidth * 3, tHeight * 2, tWidth, tHeight);
 		front_wall = tileSheet.crop(tWidth * 4, 0, tWidth, tHeight);
@@ -81,5 +96,12 @@ public class Assets {
 		whiteboard_wall = tileSheet.crop(tWidth * 6, 0, tWidth, tHeight);
 		closed_window = tileSheet.crop(tWidth * 5, tHeight, tWidth, tHeight);
 		open_window = tileSheet.crop(tWidth * 5, tHeight, tWidth, tHeight);
+		
+		gym_wall_front = ImageLoader.loadImage("/sprites/tiles/gym_wall_front.png");
+		gym_wall_right = ImageLoader.loadImage("/sprites/tiles/gym_wall_right.png");
+		gym_wall_left = ImageLoader.loadImage("/sprites/tiles/gym_wall_left.png");
+		hall_floor = ImageLoader.loadImage("/sprites/tiles/hallway_floor_light.png");
+		bathroom_floor = ImageLoader.loadImage("/sprites/tiles/bathroom_floor.png");
+		aud_stage = ImageLoader.loadImage("/sprites/tiles/aud_stage.png");
 	}
 }

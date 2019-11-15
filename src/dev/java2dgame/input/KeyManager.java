@@ -8,7 +8,7 @@ public class KeyManager implements KeyListener {
 	private boolean[] keys, justPressed, cantPress;
 	
 	// P keys is for the perron fight.
-	public boolean up, down, left, right, space, pKeysReleased;
+	public boolean up, down, left, right, space, shift, pKeysReleased;
 	
 	public KeyManager() {
 		keys = new boolean[256];
@@ -35,6 +35,7 @@ public class KeyManager implements KeyListener {
 		right = keys[KeyEvent.VK_D];
 		left = keys[KeyEvent.VK_A];
 		space = keys[KeyEvent.VK_SPACE];
+		shift = keys[KeyEvent.VK_SHIFT];
 	}
 	
 	public boolean keyJustPressed(int keyCode){

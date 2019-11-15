@@ -8,8 +8,8 @@ public class ImageButton extends UIObject {
 	private BufferedImage[] images;
 	private ClickListener click;
 
-	public ImageButton(float x, float y, int width, int height, BufferedImage[] images, ClickListener click) {
-		super(x, y, width, height);
+	public ImageButton(float x, float y, BufferedImage[] images, ClickListener click) {
+		super(x, y, images[0].getWidth(), images[0].getHeight());
 		
 		this.images = images;
 		this.width = images[0].getWidth();

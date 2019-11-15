@@ -73,22 +73,6 @@ public class World {
 		
 		tiles = new int[width][height];
 		
-		/*
-		 *  Resizes the screen based on the width and height of tiles.
-		 *  This doesn't make the screen huge if the width and height of the map is large
-		 *  there is a limit that will keep the screen from going past 1280x704.
-		 */
-		
-		int newWidth = width * Tile.TILE_WIDTH;
-		int newHeight = height * Tile.TILE_HEIGHT;
-		
-		if (width > 20)
-			newWidth = 1280;
-		if (height > 11)
-			newHeight = 704;
-	
-			handler.getWindow().getFrame().setSize(newWidth, newHeight);
-		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
@@ -111,7 +95,7 @@ public class World {
 				} else if (nameOfObj.equals("AreaSwitch")) {
 					entityManager.addEntity(new AreaSwitch(handler, xOfObj, yOfObj, idOfObj));
 				} else if (nameOfObj.equals("Teacher")) {
-					entityManager.addEntity(new Teacher(handler, xOfObj, yOfObj));
+					entityManager.addEntity(new Teacher(handler, xOfObj, yOfObj, idOfObj));
 				} else if (nameOfObj.equals("WoodenTable")) {
 					entityManager.addEntity(new WoodenTable(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("ComputerMonitor")) {
