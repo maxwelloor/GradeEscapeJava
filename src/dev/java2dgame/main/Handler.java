@@ -9,6 +9,7 @@ import dev.java2dgame.worlds.World;
 public class Handler {
 	
 	private Game game;
+	private int currentWorldNumber;
 	private World world;
 	
 	public Handler(Game game) {
@@ -51,8 +52,17 @@ public class Handler {
 		return world;
 	}
 
-	public void setWorld(World world) {
-		this.world = world;
+	public void setWorld(World w) {
+		currentWorldNumber = w.getWorldNumber();
+		this.world = w;
+	}
+	
+	public void setCurrentWorldNumber(int num) {
+		this.currentWorldNumber = num;
+	}
+	
+	public int getCurrentWorldNumber() {
+		return currentWorldNumber;
 	}
 
 }

@@ -13,7 +13,7 @@ public class Teacher extends StaticEntity {
 	
 	private boolean showingDialogue = false;
 	private DialogueBoxUI[] dialogues;
-	private int currentDialogue = 0;
+	private int currentDialogue = 0, teacherId;
 	private Animation standingAnim;
 
 	public Teacher(Handler handler, float x, float y, int id) {
@@ -22,11 +22,12 @@ public class Teacher extends StaticEntity {
 		this.interactible = true;
 		hitbox.width = 64;
 		hitbox.height = 64;
+		teacherId = id;
 		
 		// Mr Breaton.
 		if (id == 0) {
 			standingAnim = new Animation(500, Assets.mr_breaton);
-			dialogues = new DialogueBoxUI[] {new DialogueBoxUI(handler, "Hey I'm a garbage teacher"), new DialogueBoxUI(handler, "Nice to see you")};
+			dialogues = new DialogueBoxUI[] {new DialogueBoxUI(handler, "Hey I'm a teacher nice to meet you."), new DialogueBoxUI(handler, "Nice to see you")};
 		}
 	}
 
@@ -64,5 +65,13 @@ public class Teacher extends StaticEntity {
 			if (currentDialogue < dialogues.length - 1)
 				currentDialogue++;
 		}
+	}
+
+	public int getTeacherId() {
+		return teacherId;
+	}
+	
+	public int getCurrentDialogueIndex() {
+		return currentDialogue;
 	}
 }

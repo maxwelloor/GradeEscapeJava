@@ -16,6 +16,7 @@ import dev.java2dgame.utils.Utils;
 public class World {
 	
 	private Handler handler;
+	private int worldNumber;
 	private int width, height;
 	private int spawnX, spawnY;
 	private int[][] tiles;
@@ -25,6 +26,7 @@ public class World {
 	
 	public World(Handler handler, String path) {
 		this.handler = handler;
+		worldNumber = Integer.parseInt(path);
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
 		
 		loadWorld(path);
@@ -120,6 +122,12 @@ public class World {
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
-	
-	
+
+	public int getWorldNumber() {
+		return worldNumber;
+	}
+
+	public void setWorldNumber(int worldNumber) {
+		this.worldNumber = worldNumber;
+	}
 }

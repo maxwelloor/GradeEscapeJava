@@ -1,22 +1,38 @@
 package dev.java2dgame.quests;
 
 import dev.java2dgame.main.Handler;
-import dev.java2dgame.ui.UIObject;
 
 // TODO add quest functionality.
 
 public abstract class Quest {
+	// Static Stuff
+	protected static Handler handler;
+	private static int numberOfQuests = 0;
+	private static Quest[] quests = new Quest[256];
 	
-	protected Handler handler;
-	protected boolean questCompleted;
+	public static Quest placeholderQuest = new PlaceholderQuest();
+	public static Quest talkToBreatonQuest = new TalkToBreatonQuest();
+	public static Quest enterNewAreaQuest = new EnterNewAreaQuest();
+	
+	public static Quest[] getQuests() {
+		return quests;
+	}
+	
+	public static void setHandler(Handler handler) {
+		Quest.handler = handler;
+	}
+	
+	// Dynamic Stuff
+	protected boolean questCompleted = false, questGiven = false;
 	protected String qName, qDesc;
 	
-	public Quest(Handler handler, String qName, String qDesc) {
-		this.handler = handler;
+	public Quest(String qName, String qDesc) {
 		this.qName = qName;
 		this.qDesc = qDesc;
 		
 		this.questCompleted = false;
+		Quest.quests[Quest.numberOfQuests] = this;
+		Quest.numberOfQuests++;
 	}
 	
 	/*
@@ -29,19 +45,34 @@ public abstract class Quest {
 		
 	//}
 	
-	public abstract void tick();
-	
 	// An if statement that can be anything to check weather the quest has been completed.
 	public abstract boolean isQuestRequirementFilled();
 	
 	// The method that is called on the quest when its completed
-	public abstract void finished();
+	public abstract void questReward();
 	
-	public void setQuestCompleted(boolean completed) {
-		questCompleted = completed;
+	public void tick() {
+		if (isQuestRequirementFilled())
+			finished();
+	}
+	
+	public void finished() {
+		questCompleted = true;
+		System.out.println("Quest: " + qName + " has been completed!");
+		questReward();
 	}
 	
 	public boolean isQuestCompleted() {
 		return questCompleted;
 	}
+
+	public boolean isQuestGiven() {
+		return questGiven;
+	}
+
+	public void setQuestGiven(boolean questGiven) {
+		this.questGiven = questGiven;
+	}
+	
+	
 }

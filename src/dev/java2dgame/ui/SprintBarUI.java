@@ -25,8 +25,7 @@ public class SprintBarUI extends UIObject {
 	@Override
 	public void tick() {
 
-		if (handler.getWorld().getEntityManager().getPlayer().getSprinting()) {
-			
+		if (handler.getWorld().getEntityManager().getPlayer().getSprinting()) {		
 			// If the bar isnt empty minus from the barHeigh int.
 			if (!isStaminaEmpty()) {
 				barHeight--;

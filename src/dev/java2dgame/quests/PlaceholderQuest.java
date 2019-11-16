@@ -1,24 +1,15 @@
 package dev.java2dgame.quests;
 
-import dev.java2dgame.main.Handler;
-
 public class PlaceholderQuest extends Quest {
 
-	public PlaceholderQuest(Handler handler, String qName, String qDesc) {
-		super(handler, qName, qDesc);
-	}
-
-	@Override
-	public void tick() {
-		if (isQuestRequirementFilled()) {
-			finished();
-		}
+	public PlaceholderQuest() {
+		super("Testing Quest", "This is a testing quest for testing the funcionality of the quests system in the game.");
 	}
 
 	@Override
 	public boolean isQuestRequirementFilled() {
 		if (!questCompleted) {
-			if (this.handler.getWorld().getEntityManager().getPlayer().isTired())
+			if (handler.getWorld().getEntityManager().getPlayer().isTired())
 				return true;
 			else
 				return false;
@@ -28,10 +19,8 @@ public class PlaceholderQuest extends Quest {
 		
 	}
 
-	@Override
-	public void finished() {
-		setQuestCompleted(true);
-		System.out.println("Jobs done!");
+	public void questReward() {
+
 	}
 
 }

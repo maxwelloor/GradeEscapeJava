@@ -7,6 +7,7 @@ import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.gfx.GameCamera;
 import dev.java2dgame.input.KeyManager;
 import dev.java2dgame.input.MouseManager;
+import dev.java2dgame.quests.Quest;
 import dev.java2dgame.states.GameState;
 import dev.java2dgame.states.MenuState;
 import dev.java2dgame.states.PerronFightState;
@@ -70,6 +71,7 @@ public class Game implements Runnable {
 		perronFightState = new PerronFightState(handler);
 		
 		State.setState(gameState);
+		Quest.setHandler(handler);
 	}
 	
 	public void tick() {

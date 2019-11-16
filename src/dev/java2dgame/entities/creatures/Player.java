@@ -7,7 +7,6 @@ import dev.java2dgame.entities.Entity;
 import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
-import dev.java2dgame.quests.PlaceholderQuest;
 import dev.java2dgame.quests.Quest;
 
 public class Player extends Creature {
@@ -17,7 +16,6 @@ public class Player extends Creature {
 	private Animation idleAnim;
 	private Animation[] defaultAnims, sprintingAnims, tiredAnims, currentAnims;
 	
-	private Quest currentQuest;
 	private boolean isSprinting, canInteract, staminaBarEmpty, isTired;
 
 	public Player(Handler handler, float x, float y) {
@@ -56,12 +54,13 @@ public class Player extends Creature {
 		};
 		
 		currentAnims = defaultAnims;
+		giveQuest(Quest.placeholderQuest);
+		giveQuest(Quest.talkToBreatonQuest);
+		giveQuest(Quest.enterNewAreaQuest);
 		
 		isSprinting = false;
 		canInteract = false;
 		staminaBarEmpty = false;
-		
-		currentQuest = new PlaceholderQuest(handler, "I", "am");
 	}
 	
 	public void tick() {
@@ -76,8 +75,12 @@ public class Player extends Creature {
 		}
 		
 		// Quest stuff
-		if (!currentQuest.isQuestCompleted()) {
-			currentQuest.tick();
+		for (Quest quest : Quest.getQuests()) {
+			if (quest == null)
+				break;
+			
+			if (quest.isQuestGiven())
+				quest.tick();
 		}
 		// Quest stuff over.
 		
@@ -184,12 +187,8 @@ public class Player extends Creature {
 		this.canInteract = canInteract;
 	}
 
-	public Quest getCurrentQuest() {
-		return currentQuest;
-	}
-
-	public void setCurrentQuest(Quest quest) {
-		this.currentQuest = currentQuest;
+	public void giveQuest(Quest quest) {
+		quest.setQuestGiven(true);
 	}
 	
 	public void setSprinting(boolean sprinting) {
