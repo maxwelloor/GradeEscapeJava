@@ -8,6 +8,7 @@ import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.quests.Quest;
+import dev.java2dgame.ui.QuestGetUI;
 
 public class Player extends Creature {
 
@@ -54,9 +55,7 @@ public class Player extends Creature {
 		};
 		
 		currentAnims = defaultAnims;
-		giveQuest(Quest.placeholderQuest);
-		giveQuest(Quest.talkToBreatonQuest);
-		giveQuest(Quest.enterNewAreaQuest);
+		giveQuest(Quest.talkToBreatonQuest, "none");
 		
 		isSprinting = false;
 		canInteract = false;
@@ -187,8 +186,15 @@ public class Player extends Creature {
 		this.canInteract = canInteract;
 	}
 
-	public void giveQuest(Quest quest) {
+	public void giveQuest(Quest quest, String showMsg) {
 		quest.setQuestGiven(true);
+		
+		if (showMsg.equals("show")) {
+			handler.getMouseManager().getUiManager().addObject(new QuestGetUI(handler, quest.getQuestName()));
+		} else if (showMsg.equals("wait")) {
+			handler.getMouseManager().getUiManager().setObjectInQueue(new QuestGetUI(handler, quest.getQuestName()));
+			handler.getMouseManager().getUiManager().setIfItemInQueue(true);
+		}
 	}
 	
 	public void setSprinting(boolean sprinting) {

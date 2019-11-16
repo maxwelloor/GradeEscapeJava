@@ -48,6 +48,12 @@ public class QuestCompleteUI extends UIObject {
 			
 			if (y < -BOX_HEIGHT) {
 				handler.getMouseManager().getUiManager().getObjectsToRemove().add(this);
+				if (handler.getMouseManager().getUiManager().doesQueueHaveItem()) {
+					handler.getMouseManager().getUiManager().getObjectsToAdd().add((handler.
+												getMouseManager().getUiManager().getObjectInQueue()));
+					handler.getMouseManager().getUiManager().setObjectInQueue(null);
+					handler.getMouseManager().getUiManager().setIfItemInQueue(false);
+				}
 			}
 		}
 	}

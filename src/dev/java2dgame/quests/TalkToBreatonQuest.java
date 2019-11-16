@@ -27,7 +27,7 @@ public class TalkToBreatonQuest extends Quest {
 
 	@Override
 	public void questReward() {
-	
+		handler.getWorld().getEntityManager().getPlayer().giveQuest(Quest.enterNewAreaQuest, "wait");
 	}
 
 }

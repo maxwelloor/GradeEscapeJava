@@ -59,7 +59,6 @@ public abstract class Quest {
 	
 	public void finished() {
 		questCompleted = true;
-		System.out.println("Quest: " + qName + " has been completed!");
 		handler.getMouseManager().getUiManager().addObject(new QuestCompleteUI(handler, qName));
 		questReward();
 	}
@@ -74,6 +73,10 @@ public abstract class Quest {
 
 	public void setQuestGiven(boolean questGiven) {
 		this.questGiven = questGiven;
+	}
+	
+	public String getQuestName() {
+		return qName;
 	}
 	
 	

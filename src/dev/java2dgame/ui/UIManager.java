@@ -9,13 +9,18 @@ import dev.java2dgame.main.Handler;
 public class UIManager {
 	
 	private Handler handler;
+	private UIObject objectInQueue;
+	private boolean queueHasItem;
 	private ArrayList<UIObject> objects;
 	protected ArrayList<UIObject> objectsToRemove;
+	protected ArrayList<UIObject> objectsToAdd;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
+		this.objectInQueue = null;
 		this.objects = new ArrayList<UIObject>();
 		this.objectsToRemove = new ArrayList<UIObject>();
+		this.objectsToAdd = new ArrayList<UIObject>();
 	}
 	
 	public void tick() {
@@ -27,6 +32,11 @@ public class UIManager {
 			objects.remove(obj);
 		}
 		
+		for (UIObject obj: objectsToAdd) {
+			objects.add(obj);
+		}
+		
+		objectsToAdd.clear();
 		objectsToRemove.clear();
 	}
 	
@@ -58,5 +68,25 @@ public class UIManager {
 	
 	public ArrayList<UIObject> getObjectsToRemove() {
 		return objectsToRemove;
+	}
+	
+	public ArrayList<UIObject> getObjectsToAdd() {
+		return objectsToAdd;
+	}
+	
+	public void setObjectInQueue(UIObject obj) {
+		objectInQueue = obj;
+	}
+	
+	public UIObject getObjectInQueue() {
+		return objectInQueue;
+	}
+	
+	public boolean doesQueueHaveItem() {
+		return queueHasItem;
+	}
+	
+	public void setIfItemInQueue(boolean isThereItem) {
+		queueHasItem = isThereItem;
 	}
 }
