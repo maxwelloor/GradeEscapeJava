@@ -10,7 +10,7 @@ import dev.java2dgame.main.Handler;
 
 public class QuestCompleteUI extends UIObject {
 	
-	private static final int BOX_WIDTH = 300, BOX_HEIGHT = 80, BOX_SPEED = 3, FRAMES_BEFORE_LEAVE = 120,
+	private static final int BOX_WIDTH = 400, BOX_HEIGHT = 80, BOX_SPEED = 3, FRAMES_BEFORE_LEAVE = 120,
 			START_X = 0, START_Y = -BOX_HEIGHT, BORDER_THICKNESS = 5;
 			
 	private static final Font Q_NAME_FONT = Assets.quest_name_font, Q_COMPLETED_FONT = Assets.quest_complete_font;

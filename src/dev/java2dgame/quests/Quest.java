@@ -14,6 +14,7 @@ public abstract class Quest {
 	public static Quest placeholderQuest = new PlaceholderQuest();
 	public static Quest talkToBreatonQuest = new TalkToBreatonQuest();
 	public static Quest enterNewAreaQuest = new EnterNewAreaQuest();
+	public static Quest findMooresHairQuest = new FindMooresHairQuest();
 	
 	public static Quest[] getQuests() {
 		return quests;

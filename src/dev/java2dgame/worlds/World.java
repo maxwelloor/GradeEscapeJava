@@ -2,6 +2,7 @@ package dev.java2dgame.worlds;
 
 import java.awt.Graphics;
 
+import dev.java2dgame.collectibles.CollectibleManager;
 import dev.java2dgame.entities.EntityManager;
 import dev.java2dgame.entities.creatures.Player;
 import dev.java2dgame.entities.statics.AreaSwitch;
@@ -23,11 +24,13 @@ public class World {
 	
 	//Entities
 	private EntityManager entityManager;
+	private CollectibleManager collectibleManager;
 	
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		worldNumber = Integer.parseInt(path);
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		collectibleManager = new CollectibleManager(handler);
 		
 		loadWorld(path);
 		
@@ -37,6 +40,7 @@ public class World {
 	
 	public void tick() {
 		entityManager.tick();
+		collectibleManager.tick();
 	}
 	
 	public void render(Graphics g) {
@@ -52,6 +56,7 @@ public class World {
 			}
 		}
 		entityManager.render(g);
+		collectibleManager.render(g);
 	}
 	
 	public Tile getTile(int x, int y) {
@@ -121,6 +126,10 @@ public class World {
 
 	public EntityManager getEntityManager() {
 		return entityManager;
+	}
+	
+	public CollectibleManager getCollectibleManager() {
+		return collectibleManager;
 	}
 
 	public int getWorldNumber() {

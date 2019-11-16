@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import dev.java2dgame.entities.creatures.Player;
 import dev.java2dgame.main.Handler;
@@ -34,11 +35,14 @@ public class EntityManager {
 	}
 
 	public void tick() {
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
+		entities.sort(renderSorter);
+		Iterator<Entity> it = entities.iterator();
+		
+		while (it.hasNext()) {
+			Entity e = it.next();
+			
 			e.tick();
 		}
-		entities.sort(renderSorter);
 		
 		// Turns on hitbox drawing if the h key is pressed
 		if (handler.getKeyManager().keyJustPressed((KeyEvent.VK_H))) {

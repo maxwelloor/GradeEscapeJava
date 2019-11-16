@@ -56,6 +56,7 @@ public class Player extends Creature {
 		
 		currentAnims = defaultAnims;
 		giveQuest(Quest.talkToBreatonQuest, "none");
+		giveQuest(Quest.findMooresHairQuest, "show");
 		
 		isSprinting = false;
 		canInteract = false;

@@ -2,6 +2,7 @@ package dev.java2dgame.states;
 
 import java.awt.Graphics;
 
+import dev.java2dgame.collectibles.Collectible;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.ui.SprintBarUI;
 import dev.java2dgame.ui.UIManager;
@@ -13,11 +14,12 @@ public class GameState extends State{
 	
 	public GameState(Handler handler) {
 		super(handler);
-		handler.setWorld(new World(handler, "1"));
-		
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUiManager(uiManager);
 		handler.getMouseManager().getUiManager().addObject(new SprintBarUI(handler));
+		
+		handler.setWorld(new World(handler, "1"));
+		handler.getWorld().getCollectibleManager().addCollectible(Collectible.mooresHair, 100, 250);
 	}
 
 	@Override
