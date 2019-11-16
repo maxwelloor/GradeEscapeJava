@@ -8,7 +8,7 @@ import dev.java2dgame.main.Handler;
 public class ComputerMonitor extends StaticEntity {
 
 	public ComputerMonitor(Handler handler, float x, float y) {
-		super(handler, x, y);
+		super(handler, x, y, false);
 		
 		hitbox.width = Assets.computer_monitor.getWidth();
 		hitbox.height = Assets.computer_monitor.getHeight();

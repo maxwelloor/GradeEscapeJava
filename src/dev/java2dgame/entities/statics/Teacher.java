@@ -17,7 +17,7 @@ public class Teacher extends StaticEntity {
 	private Animation standingAnim;
 
 	public Teacher(Handler handler, float x, float y, int id) {
-		super(handler, x, y);
+		super(handler, x, y, true);
 		
 		this.interactible = true;
 		hitbox.width = 64;

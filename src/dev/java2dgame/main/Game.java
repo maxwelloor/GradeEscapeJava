@@ -48,12 +48,18 @@ public class Game implements Runnable {
 		this.title = title;
 		
 		keyManager = new KeyManager();
-		mouseManager = new MouseManager();
+		mouseManager = new MouseManager(handler);
 	}
 	
 	private void init() {
 		window = new Window(title, width, height);
+		
+		// Key and mouse listeners
 		window.getFrame().addKeyListener(keyManager);
+		window.getFrame().addMouseListener(mouseManager);
+		window.getFrame().addMouseMotionListener(mouseManager);
+		window.getCanvas().addMouseListener(mouseManager);
+		window.getCanvas().addMouseMotionListener(mouseManager);
 		Assets.init();
 		
 		handler = new Handler(this);

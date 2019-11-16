@@ -10,7 +10,7 @@ public class AreaSwitch extends StaticEntity {
 	private int sendTo;
 
 	public AreaSwitch(Handler handler, float x, float y, int sendTo) {
-		super(handler, x, y);
+		super(handler, x, y, true);
 		// sendTo is the number of the map the switch will send the player to.
 		this.sendTo = sendTo;
 		
@@ -24,8 +24,10 @@ public class AreaSwitch extends StaticEntity {
 
 	@Override
 	public void tick() {
-		if (touchingPlayer())
+		// If the player interacts with this
+		if (this.checkForPlayerInteract(handler.getWorld().getEntityManager().getPlayer())) {
 			changeWorld();
+		}
 	}
 
 	@Override

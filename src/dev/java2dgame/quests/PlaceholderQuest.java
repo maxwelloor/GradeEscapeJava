@@ -10,17 +10,28 @@ public class PlaceholderQuest extends Quest {
 
 	@Override
 	public void tick() {
-		
+		if (isQuestRequirementFilled()) {
+			finished();
+		}
 	}
 
 	@Override
-	public boolean isQuestDone() {
-		return false;
+	public boolean isQuestRequirementFilled() {
+		if (!questCompleted) {
+			if (this.handler.getWorld().getEntityManager().getPlayer().isTired())
+				return true;
+			else
+				return false;
+		} else {
+			return false;
+		}
+		
 	}
 
 	@Override
 	public void finished() {
-		
+		setQuestCompleted(true);
+		System.out.println("Jobs done!");
 	}
 
 }

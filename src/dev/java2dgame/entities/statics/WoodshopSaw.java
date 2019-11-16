@@ -9,7 +9,7 @@ import dev.java2dgame.tiles.Tile;
 public class WoodshopSaw extends StaticEntity {
 	
 	public WoodshopSaw(Handler handler, float x, float y) {
-		super(handler, x, y);
+		super(handler, x, y, false);
 		
 		hitbox.x = 0;
 		hitbox.y = 50;

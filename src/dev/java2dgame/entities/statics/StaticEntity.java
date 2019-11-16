@@ -7,7 +7,7 @@ import dev.java2dgame.main.Handler;
 
 public abstract class StaticEntity extends Entity {
 
-	public StaticEntity(Handler handler, float x, float y) {
-		super(handler, x, y);
+	public StaticEntity(Handler handler, float x, float y, boolean interactible) {
+		super(handler, x, y, interactible);
 	}
 }

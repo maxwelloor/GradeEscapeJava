@@ -7,12 +7,16 @@ import dev.java2dgame.ui.UIObject;
 
 public abstract class Quest {
 	
-	private Handler handler;
-	private String qName, qDesc;
+	protected Handler handler;
+	protected boolean questCompleted;
+	protected String qName, qDesc;
 	
 	public Quest(Handler handler, String qName, String qDesc) {
+		this.handler = handler;
 		this.qName = qName;
 		this.qDesc = qDesc;
+		
+		this.questCompleted = false;
 	}
 	
 	/*
@@ -28,8 +32,16 @@ public abstract class Quest {
 	public abstract void tick();
 	
 	// An if statement that can be anything to check weather the quest has been completed.
-	public abstract boolean isQuestDone();
+	public abstract boolean isQuestRequirementFilled();
 	
 	// The method that is called on the quest when its completed
 	public abstract void finished();
+	
+	public void setQuestCompleted(boolean completed) {
+		questCompleted = completed;
+	}
+	
+	public boolean isQuestCompleted() {
+		return questCompleted;
+	}
 }

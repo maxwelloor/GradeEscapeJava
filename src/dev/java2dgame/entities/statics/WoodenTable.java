@@ -8,7 +8,7 @@ import dev.java2dgame.main.Handler;
 public class WoodenTable extends StaticEntity {
 
 	public WoodenTable(Handler handler, float x, float y) {
-		super(handler, x, y);
+		super(handler, x, y, false);
 		
 		hitbox.x = 0;
 		hitbox.y = 15;

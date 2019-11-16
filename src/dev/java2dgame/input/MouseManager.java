@@ -4,16 +4,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import dev.java2dgame.main.Handler;
 import dev.java2dgame.ui.UIManager;
 
 public class MouseManager implements MouseListener, MouseMotionListener {
 	
+	private Handler handler;
 	private boolean leftPressed, rightPressed;
 	private int mouseX, mouseY;
 	private UIManager uiManager;
 	
-	public MouseManager() {
-		
+	public MouseManager(Handler handler) {
+		this.handler = handler;
 	}
 
 	@Override

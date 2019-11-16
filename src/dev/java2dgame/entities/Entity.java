@@ -17,9 +17,9 @@ public abstract class Entity {
 	protected Rectangle hitbox;
 	protected boolean interactible;
 	
-	public Entity(Handler handler, float x, float y) {
+	public Entity(Handler handler, float x, float y, boolean interactible) {
 		this.handler = handler;
-		this.interactible = false;
+		this.interactible = interactible;
 		this.x = x;
 		this.y = y;
 		

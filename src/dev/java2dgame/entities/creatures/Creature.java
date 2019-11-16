@@ -14,7 +14,7 @@ public abstract class Creature extends Entity {
 
 	public Creature(Handler handler, float x, float y) {
 		// super means the parent classes constructor.
-		super(handler, x, y);
+		super(handler, x, y, false);
 		speed = DEFAULT_SPEED;
 		xMove = 0;
 		yMove = 0;

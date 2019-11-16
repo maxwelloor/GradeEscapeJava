@@ -70,9 +70,14 @@ public class Player extends Creature {
 		handler.getGameCamera().centerOnEntity(this);
 		tickAnimations();
 		
+		// TODO DELETE THIS WHEN DONE ITS FOR TESTING.
+		if (handler.getMouseManager().isLeftPressed()) {
+			System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
+		}
+		
 		// Quest stuff
-		if (currentQuest.isQuestDone()) {
-			currentQuest.finished();
+		if (!currentQuest.isQuestCompleted()) {
+			currentQuest.tick();
 		}
 		// Quest stuff over.
 		
