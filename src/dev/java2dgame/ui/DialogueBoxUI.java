@@ -13,7 +13,7 @@ import dev.java2dgame.utils.Utils;
 public class DialogueBoxUI extends UIObject{
 	
 	private static int boxHeight = 250, totalEdgeGap = 50, textGap = 20, loopsToTick = 2;
-	private static Font font = Assets.dialogueFont;
+	private static Font font = Assets.dialogue_font;
 	
 	private Handler handler;
 	private int boxX, boxY, boxWidth, loops;

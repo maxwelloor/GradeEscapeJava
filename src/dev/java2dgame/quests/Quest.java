@@ -1,6 +1,7 @@
 package dev.java2dgame.quests;
 
 import dev.java2dgame.main.Handler;
+import dev.java2dgame.ui.QuestCompleteUI;
 
 // TODO add quest functionality.
 
@@ -59,6 +60,7 @@ public abstract class Quest {
 	public void finished() {
 		questCompleted = true;
 		System.out.println("Quest: " + qName + " has been completed!");
+		handler.getMouseManager().getUiManager().addObject(new QuestCompleteUI(handler, qName));
 		questReward();
 	}
 	

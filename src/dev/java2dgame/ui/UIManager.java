@@ -10,16 +10,24 @@ public class UIManager {
 	
 	private Handler handler;
 	private ArrayList<UIObject> objects;
+	protected ArrayList<UIObject> objectsToRemove;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
 		this.objects = new ArrayList<UIObject>();
+		this.objectsToRemove = new ArrayList<UIObject>();
 	}
 	
 	public void tick() {
 		for (UIObject obj: objects) {
 			obj.tick();
 		}
+		
+		for (UIObject obj: objectsToRemove) {
+			objects.remove(obj);
+		}
+		
+		objectsToRemove.clear();
 	}
 	
 	public void render(Graphics g) {
@@ -46,5 +54,9 @@ public class UIManager {
 	
 	public void removeObject(UIObject obj) {
 		objects.remove(obj);
+	}
+	
+	public ArrayList<UIObject> getObjectsToRemove() {
+		return objectsToRemove;
 	}
 }

@@ -11,7 +11,7 @@ public class Assets {
 	public static final int tWidth = Tile.TILE_WIDTH, tHeight = Tile.TILE_HEIGHT;
 	
 	//FONTS
-	public static Font dialogueFont, testFont;
+	public static Font dialogue_font, quest_complete_font, quest_name_font;
 
 	// TILES
 	public static BufferedImage nothing, hall_floor, aud_floor, gym_floor,
@@ -70,8 +70,9 @@ public class Assets {
 		mr_kitchen = mr_kitchen_sheet.getPlayerList(1, 2, 24, 26);
 		
 		//Fonts.
-		dialogueFont = Fonts.loadFont("/fonts/munro.ttf", 48);
-		testFont = new Font("arial", Font.PLAIN, 32);
+		dialogue_font = Fonts.loadFont("/fonts/munro.ttf", 48);
+		quest_name_font = Fonts.loadFont("/fonts/munro.ttf", 24);
+		quest_complete_font = Fonts.loadFont("/fonts/munro.ttf", 36);
 		
 		// UI
 		interact_mark = ImageLoader.loadImage("/sprites/ui/interact_mark.png");
