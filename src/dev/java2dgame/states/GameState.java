@@ -11,13 +11,13 @@ import dev.java2dgame.worlds.World;
 public class GameState extends State{
 	
 	private UIManager uiManager;
-	private Flashlight flashlight;
+	//private Flashlight flashlight;
 	
 	public GameState(Handler handler) {
 		super(handler);
 		handler.setWorld(new World(handler, "1"));
 		
-		flashlight = new Flashlight(handler);
+		//flashlight = new Flashlight(handler);
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUiManager(uiManager);
 		handler.getMouseManager().getUiManager().addObject(new SprintBarUI(handler));
@@ -32,7 +32,7 @@ public class GameState extends State{
 	@Override
 	public void render(Graphics g) {
 		handler.getWorld().render(g);
-		flashlight.render(g);
+		//flashlight.render(g);
 		uiManager.render(g);
 	}
 }

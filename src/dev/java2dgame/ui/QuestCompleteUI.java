@@ -11,7 +11,7 @@ import dev.java2dgame.main.Handler;
 public class QuestCompleteUI extends UIObject {
 	
 	private static final int BOX_WIDTH = 300, BOX_HEIGHT = 80, BOX_SPEED = 3, FRAMES_BEFORE_LEAVE = 120,
-			START_X = 0, START_Y = -BOX_HEIGHT;
+			START_X = 0, START_Y = -BOX_HEIGHT, BORDER_THICKNESS = 5;
 			
 	private static final Font Q_NAME_FONT = Assets.quest_name_font, Q_COMPLETED_FONT = Assets.quest_complete_font;
 	
@@ -63,17 +63,25 @@ public class QuestCompleteUI extends UIObject {
 		g.setColor(Color.gray);
 		g.fillRect((int) x, (int) y, BOX_WIDTH, BOX_HEIGHT);
 		
+		// Draws the border around the box
+		g.setColor(Color.black);
+		for (int xOffset = 0; xOffset < BORDER_THICKNESS; xOffset++)
+			g.drawRect((int) (x + xOffset), (int) y, BOX_WIDTH, BOX_HEIGHT);
+		
+		for (int yOffset = 0; yOffset < BORDER_THICKNESS; yOffset++)
+			g.drawRect((int) x, (int) (y + yOffset), BOX_WIDTH, BOX_HEIGHT);
+		
 		g.setColor(Color.white);
 		g.setFont(Q_NAME_FONT);
 		
 		FontMetrics fm = g.getFontMetrics();
 		
-		g.drawString("Quest: " + qName, (int) (x + 5), (int) (y + fm.getHeight()));
+		g.drawString("Quest: " + qName, (int) (x + 10), (int) (y + fm.getHeight()));
 		
 		g.setFont(Q_COMPLETED_FONT);
 		g.setColor(Color.green);
 		FontMetrics fm2 = g.getFontMetrics();
-		g.drawString("Completed!", (int) (x + 5), (int) (y + fm2.getHeight() + 20));
+		g.drawString("Completed!", (int) (x + 10), (int) (y + fm2.getHeight() + 20));
 	}
 
 	@Override
