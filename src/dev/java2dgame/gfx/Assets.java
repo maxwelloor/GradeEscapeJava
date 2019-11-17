@@ -11,7 +11,7 @@ public class Assets {
 	public static final int tWidth = Tile.TILE_WIDTH, tHeight = Tile.TILE_HEIGHT;
 	
 	//FONTS
-	public static Font dialogue_font, quest_complete_font, quest_name_font;
+	public static Font dialogue_font, quest_complete_font, quest_name_font, collectible_menu_font, collectible_menu_info_font;
 
 	// TILES
 	public static BufferedImage nothing, hall_floor, aud_floor, gym_floor,
@@ -73,6 +73,8 @@ public class Assets {
 		dialogue_font = Fonts.loadFont("/fonts/munro.ttf", 48);
 		quest_name_font = Fonts.loadFont("/fonts/munro.ttf", 24);
 		quest_complete_font = Fonts.loadFont("/fonts/munro.ttf", 36);
+		collectible_menu_font = Fonts.loadFont("/fonts/munro.ttf", 56);
+		collectible_menu_info_font = Fonts.loadFont("/fonts/munro.ttf", 28);
 		
 		// UI
 		interact_mark = ImageLoader.loadImage("/sprites/ui/interact_mark.png");

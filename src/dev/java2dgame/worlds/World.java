@@ -2,6 +2,7 @@ package dev.java2dgame.worlds;
 
 import java.awt.Graphics;
 
+import dev.java2dgame.collectibles.Collectible;
 import dev.java2dgame.collectibles.CollectibleManager;
 import dev.java2dgame.entities.EntityManager;
 import dev.java2dgame.entities.creatures.Player;
@@ -39,8 +40,8 @@ public class World {
 	}
 	
 	public void tick() {
-		entityManager.tick();
 		collectibleManager.tick();
+		entityManager.tick();
 	}
 	
 	public void render(Graphics g) {
@@ -55,8 +56,8 @@ public class World {
 						(int) (y * Tile.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
 			}
 		}
-		entityManager.render(g);
 		collectibleManager.render(g);
+		entityManager.render(g);
 	}
 	
 	public Tile getTile(int x, int y) {
@@ -97,6 +98,7 @@ public class World {
 				int yOfObj = Integer.valueOf(tokens[firstEntityI + 2]);
 				int idOfObj = Integer.valueOf(tokens[firstEntityI + 3]);
 				
+				// Entities.
 				if (nameOfObj.equals("WoodshopSaw")) {
 					entityManager.addEntity(new WoodshopSaw(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("AreaSwitch")) {
@@ -107,6 +109,11 @@ public class World {
 					entityManager.addEntity(new WoodenTable(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("ComputerMonitor")) {
 					entityManager.addEntity(new ComputerMonitor(handler, xOfObj, yOfObj));
+				}
+				
+				// Collectibles.
+				if (nameOfObj.equals("MooresHair")) {
+					collectibleManager.addCollectible(Collectible.mooresHair, xOfObj, yOfObj);
 				}
 				
 			} catch(ArrayIndexOutOfBoundsException e) {

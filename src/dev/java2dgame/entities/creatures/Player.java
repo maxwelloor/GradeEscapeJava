@@ -3,6 +3,7 @@ package dev.java2dgame.entities.creatures;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.java2dgame.collectibles.CollectibleMenu;
 import dev.java2dgame.entities.Entity;
 import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
@@ -18,6 +19,7 @@ public class Player extends Creature {
 	private Animation[] defaultAnims, sprintingAnims, tiredAnims, currentAnims;
 	
 	private boolean isSprinting, canInteract, staminaBarEmpty, isTired;
+	private CollectibleMenu collectibleMenu;
 
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y);
@@ -26,6 +28,8 @@ public class Player extends Creature {
 		hitbox.y = 48;
 		hitbox.width = 44;
 		hitbox.height = 45;
+		
+		collectibleMenu = new CollectibleMenu(handler);
 		
 		// Player idle animation.
 		idleAnim = new Animation(333, Assets.player_standing);
@@ -56,7 +60,6 @@ public class Player extends Creature {
 		
 		currentAnims = defaultAnims;
 		giveQuest(Quest.talkToBreatonQuest, "none");
-		giveQuest(Quest.findMooresHairQuest, "show");
 		
 		isSprinting = false;
 		canInteract = false;
@@ -71,7 +74,8 @@ public class Player extends Creature {
 		
 		// TODO DELETE THIS WHEN DONE ITS FOR TESTING.
 		if (handler.getMouseManager().isLeftPressed()) {
-			System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
+			//System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
+			System.out.println(handler.getMouseManager().getMouseX() + ", " + handler.getMouseManager().getMouseY());
 		}
 		
 		// Quest stuff
@@ -120,6 +124,13 @@ public class Player extends Creature {
 	}
 	
 	private void getInput() {
+		
+		if (collectibleMenu.isMenuActive()) { // Stops the player from moving if the collectible menu is active.
+			xMove = 0;
+			yMove = 0;
+			return;
+		}
+		
 		xMove = 0;
 		yMove = 0;
 		
@@ -148,7 +159,12 @@ public class Player extends Creature {
 		if (canInteract)
 			g.drawImage(Assets.interact_mark, (int) (x - handler.getGameCamera().getxOffset() + getCurrentAnimationFrame(currentAnims).getWidth()/2 - Assets.interact_mark.getWidth()/2), (int) (y - handler.getGameCamera().getyOffset()) - Assets.interact_mark.getHeight() - 10, null);
 		
+		collectibleMenu.tick(g);
 		g.drawImage(getCurrentAnimationFrame(currentAnims), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
+	}
+	
+	public void afterRender(Graphics g) {
+		collectibleMenu.render(g);
 	}
 	
 	private void tickAnimations() {

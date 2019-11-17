@@ -62,6 +62,7 @@ public class EntityManager {
 				g.drawRect((int) (e.x - handler.getGameCamera().getxOffset() + e.hitbox.x), (int) (e.y - handler.getGameCamera().getyOffset() + e.hitbox.y), e.hitbox.width, e.hitbox.height);
 			}
 		}
+		player.afterRender(g);
 	}
 	
 	public void addEntity(Entity e) {

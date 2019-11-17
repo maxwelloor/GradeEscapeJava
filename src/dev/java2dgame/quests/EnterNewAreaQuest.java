@@ -19,7 +19,7 @@ public class EnterNewAreaQuest extends Quest {
 
 	@Override
 	public void questReward() {
-		handler.getWorld().getEntityManager().getPlayer().giveQuest(Quest.placeholderQuest, "wait");
+		handler.getWorld().getEntityManager().getPlayer().giveQuest(Quest.findMooresHairQuest, "wait");
 	}
 
 }

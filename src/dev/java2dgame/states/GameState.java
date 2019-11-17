@@ -14,12 +14,12 @@ public class GameState extends State{
 	
 	public GameState(Handler handler) {
 		super(handler);
+		Collectible.setHandler(handler);
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUiManager(uiManager);
 		handler.getMouseManager().getUiManager().addObject(new SprintBarUI(handler));
 		
 		handler.setWorld(new World(handler, "1"));
-		handler.getWorld().getCollectibleManager().addCollectible(Collectible.mooresHair, 100, 250);
 	}
 
 	@Override

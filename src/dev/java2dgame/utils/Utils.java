@@ -43,6 +43,16 @@ public class Utils {
 		
 		return output;
 	}
+	
+	public static String arrayToString(String[] list) {
+		String output = "";
+		
+		for (String letter : list) {
+			output += letter;
+		}
+		
+		return output;
+	}
 }
 
 
