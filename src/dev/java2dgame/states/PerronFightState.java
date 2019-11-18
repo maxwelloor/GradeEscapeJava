@@ -8,7 +8,6 @@ import dev.java2dgame.main.Handler;
 
 public class PerronFightState extends State {
 	
-	private final int scoreSubtractDelay = 10;
 	private final int blackBarWidth = 1220, blackBarHeight = 70;
 	private final int whiteBarWidth = blackBarWidth - 20, whiteBarHeight = blackBarHeight - 20;
 	private final int redBarHeight = whiteBarHeight;
@@ -43,7 +42,6 @@ public class PerronFightState extends State {
 			}
 			
 			if (pressA) {
-				System.out.println("aa");
 				if (handler.getKeyManager().left && releasedBetween) {
 					playerScore += 1;
 					pressA = false;
@@ -82,31 +80,42 @@ public class PerronFightState extends State {
 			
 			if (playerScore >= scoreToWin) {
 				fightHappening = false;
+				timer = 3;
+				timerLoops = 0;
 			}
 			
 			// END
 			
 			redBarWidth = playerScore * 25;
+		} else {
+			timerLoops++;
+			
+			if (timer <= 0) {
+				// When the fights over it sets it back to the GameState.
+				handler.getWorld().getEntityManager().getPlayer().setPerronBeat(true);
+				State.setState(handler.getGame().getGameState());
+			} else if (timerLoops >= 60) {
+				timerLoops = 0;
+				timer--;
+			}
 		}
 	}
 
 	@Override
 	public void render(Graphics g) {
 		//STATIC BACKGROUND
-		
 		// Filling the background white
 		g.setColor(Color.white);
 		g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-		
 		// Black rect centered in the screen
 		g.setColor(Color.black);
 		g.fillRect(handler.getWidth() / 2 - blackBarWidth / 2, handler.getHeight() - blackBarHeight - 20, blackBarWidth, blackBarHeight);
-		
 		//White rect in black one
 		g.setColor(Color.white);
 		g.fillRect(handler.getWidth() / 2 - whiteBarWidth / 2, handler.getHeight() - whiteBarHeight - 30, whiteBarWidth, whiteBarHeight);
-		
 		// BACKGROUND END
+		
+		// Drawing the fight progression bar.
 		g.setColor(Color.red);
 		g.fillRect(handler.getWidth() / 2 - whiteBarWidth / 2, handler.getHeight() - redBarHeight - 30, redBarWidth, redBarHeight);
 	}

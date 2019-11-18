@@ -3,6 +3,7 @@ package dev.java2dgame.ui;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.ListIterator;
 
 public abstract class UIObject {
 	
@@ -20,7 +21,7 @@ public abstract class UIObject {
 		this.hitbox = new Rectangle((int) x, (int) y, width, height);
 	}
 	
-	public abstract void tick();
+	public abstract void tick(ListIterator<UIObject> it);
 	
 	public abstract void render(Graphics g);
 	

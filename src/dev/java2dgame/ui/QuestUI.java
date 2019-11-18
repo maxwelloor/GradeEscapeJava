@@ -1,6 +1,7 @@
 package dev.java2dgame.ui;
 
 import java.awt.Graphics;
+import java.util.ListIterator;
 
 public class QuestUI extends UIObject {
 	
@@ -14,7 +15,7 @@ public class QuestUI extends UIObject {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(ListIterator<UIObject> it) {
 		
 	}
 

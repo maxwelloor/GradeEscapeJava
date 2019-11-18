@@ -9,7 +9,7 @@ import java.util.ListIterator;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
 
-public class QuestCompleteUI extends UIObject {
+public class ReadyForHandInUI extends UIObject {
 	
 	private static final int BOX_WIDTH = 400, BOX_HEIGHT = 80, BOX_SPEED = 3, FRAMES_BEFORE_LEAVE = 120,
 			START_X = 0, START_Y = -BOX_HEIGHT, BORDER_THICKNESS = 5;
@@ -21,7 +21,7 @@ public class QuestCompleteUI extends UIObject {
 	private int frameCounter = 0;
 	private String qName;
 
-	public QuestCompleteUI(Handler handler, String qName) {
+	public ReadyForHandInUI(Handler handler, String qName) {
 		super(START_X, START_Y, 0, 0);
 		
 		this.handler = handler;
@@ -77,12 +77,12 @@ public class QuestCompleteUI extends UIObject {
 		
 		FontMetrics fm = g.getFontMetrics();
 		
-		g.drawString("Quest: " + qName, (int) (x + 10), (int) (y + fm.getHeight()));
+		g.drawString("Quest ready for hand in:", (int) (x + 10), (int) (y + fm.getHeight()));
 		
 		g.setFont(Q_COMPLETED_FONT);
-		g.setColor(Color.green);
+		g.setColor(Color.yellow);
 		FontMetrics fm2 = g.getFontMetrics();
-		g.drawString("Completed!", (int) (x + 10), (int) (y + fm2.getHeight() + 20));
+		g.drawString(qName, (int) (x + 10), (int) (y + fm2.getHeight() + 20));
 	}
 
 	@Override

@@ -2,6 +2,9 @@ package dev.java2dgame.ui;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ListIterator;
+
+import dev.java2dgame.interfaces.ClickListener;
 
 public class ImageButton extends UIObject {
 	
@@ -18,7 +21,7 @@ public class ImageButton extends UIObject {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(ListIterator<UIObject> it) {
 		
 	}
 

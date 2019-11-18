@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.util.ListIterator;
 
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
@@ -28,7 +29,7 @@ public class QuestGetUI extends UIObject {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(ListIterator<UIObject> it) {
 		if (revealing) {
 			y += BOX_SPEED;
 			if (y >= 0) {
@@ -47,7 +48,13 @@ public class QuestGetUI extends UIObject {
 			y -= BOX_SPEED;
 			
 			if (y < -BOX_HEIGHT) {
-				handler.getMouseManager().getUiManager().getObjectsToRemove().add(this);
+				it.remove();
+				
+				if (handler.getMouseManager().getUiManager().doesQueueHaveItem()) {
+					it.add(handler.getMouseManager().getUiManager().getObjectInQueue());
+					handler.getMouseManager().getUiManager().setObjectInQueue(null);
+					handler.getMouseManager().getUiManager().setIfItemInQueue(false);
+				}
 			}
 		}
 	}

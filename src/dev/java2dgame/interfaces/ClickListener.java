@@ -1,4 +1,4 @@
-package dev.java2dgame.ui;
+package dev.java2dgame.interfaces;
 
 public interface ClickListener {
 	

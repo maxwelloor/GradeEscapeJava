@@ -7,7 +7,6 @@ public class TalkToBreatonQuest extends Quest {
 
 	public TalkToBreatonQuest() {
 		super("Talk to Mr. Breaton", "You need to locate and talk to Mr. Breaton.");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -16,7 +15,7 @@ public class TalkToBreatonQuest extends Quest {
 			for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
 				if (e.getClass().getSimpleName().equals("Teacher")) {
 					Teacher t = (Teacher) e;
-					if (t.getTeacherId() == 0 && t.getCurrentDialogueIndex() != 0)
+					if (t.getTeacherId() == 0 && t.isShowingDialogue())
 						return true;
 				}
 			}
@@ -27,7 +26,7 @@ public class TalkToBreatonQuest extends Quest {
 
 	@Override
 	public void questReward() {
-		handler.getWorld().getEntityManager().getPlayer().giveQuest(Quest.enterNewAreaQuest, "wait");
+		
 	}
 
 }

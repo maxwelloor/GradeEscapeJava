@@ -3,6 +3,7 @@ package dev.java2dgame.ui;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import dev.java2dgame.main.Handler;
 
@@ -10,34 +11,28 @@ public class UIManager {
 	
 	private Handler handler;
 	private UIObject objectInQueue;
-	private boolean queueHasItem;
+	private boolean queueHasItem = false;
 	private ArrayList<UIObject> objects;
-	protected ArrayList<UIObject> objectsToRemove;
 	protected ArrayList<UIObject> objectsToAdd;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
 		this.objectInQueue = null;
 		this.objects = new ArrayList<UIObject>();
-		this.objectsToRemove = new ArrayList<UIObject>();
 		this.objectsToAdd = new ArrayList<UIObject>();
 	}
 	
-	public void tick() {
-		for (UIObject obj: objects) {
-			obj.tick();
-		}
-		
-		for (UIObject obj: objectsToRemove) {
-			objects.remove(obj);
+	public void tick(ListIterator<UIObject> it) {
+		while (it.hasNext()) {
+			UIObject obj = it.next();
+			obj.tick(it);
 		}
 		
 		for (UIObject obj: objectsToAdd) {
-			objects.add(obj);
+			addObject(obj);
 		}
 		
 		objectsToAdd.clear();
-		objectsToRemove.clear();
 	}
 	
 	public void render(Graphics g) {
@@ -58,16 +53,28 @@ public class UIManager {
 		}
 	}
 	
+	public ArrayList<UIObject> getObjects() {
+		return objects;
+	}
+	
 	public void addObject(UIObject obj) {
-		objects.add(obj);
+		if (obj.getClass().getSimpleName().equals("ReadyForHandInUI") || obj.getClass().getSimpleName().equals("QuestGetUI") || obj.getClass().getSimpleName().equals("QuestCompleteUI")) {
+			for (UIObject object: handler.getMouseManager().getUiManager().getObjects()) {
+				if (object.getClass().getSimpleName().equals("ReadyForHandInUI") || object.getClass().getSimpleName().equals("QuestGetUI") || object.getClass().getSimpleName().equals("QuestCompleteUI")) {
+					System.out.println("Item added to queue.");
+					objectInQueue = obj;
+					queueHasItem = true;
+					return;
+				}
+			}
+			objects.add(obj);
+		} else {
+			objects.add(obj);
+		}
 	}
 	
 	public void removeObject(UIObject obj) {
 		objects.remove(obj);
-	}
-	
-	public ArrayList<UIObject> getObjectsToRemove() {
-		return objectsToRemove;
 	}
 	
 	public ArrayList<UIObject> getObjectsToAdd() {

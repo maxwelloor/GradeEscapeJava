@@ -2,8 +2,8 @@ package dev.java2dgame.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ListIterator;
 
-import dev.java2dgame.entities.creatures.Player;
 import dev.java2dgame.main.Handler;
 
 public class SprintBarUI extends UIObject {
@@ -23,7 +23,7 @@ public class SprintBarUI extends UIObject {
 	}
 
 	@Override
-	public void tick() {
+	public void tick(ListIterator<UIObject> it) {
 
 		if (handler.getWorld().getEntityManager().getPlayer().getSprinting()) {		
 			// If the bar isnt empty minus from the barHeigh int.

@@ -70,8 +70,8 @@ public class Game implements Runnable {
 		menuState = new MenuState(handler);
 		perronFightState = new PerronFightState(handler);
 		
-		State.setState(gameState);
 		Quest.setHandler(handler);
+		State.setState(gameState);
 	}
 	
 	public void tick() {
@@ -173,6 +173,18 @@ public class Game implements Runnable {
 	
 	public MouseManager getMouseManager() {
 		return mouseManager;
+	}
+
+	public State getGameState() {
+		return gameState;
+	}
+
+	public State getMenuState() {
+		return menuState;
+	}
+
+	public State getPerronFightState() {
+		return perronFightState;
 	}
 	
 }

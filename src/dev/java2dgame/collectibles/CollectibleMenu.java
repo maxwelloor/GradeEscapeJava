@@ -100,8 +100,6 @@ public class CollectibleMenu {
 		}
 		
 		for (int lines = 1; lines < 3; lines++ ) {
-			int temp_h = MENU_H - (Fonts.getFontHeight(FONT) + 5);
-			System.out.println(temp_h/2);
 			int temp_y = y + Fonts.getFontHeight(FONT) + 5;
 			for (int yOffset = 0; yOffset <= LINE_THICKNESS; yOffset++) {
 				g.drawLine(x, (temp_y + 88 * lines) + yOffset, x + MENU_W, (temp_y + 88 * lines) + yOffset);

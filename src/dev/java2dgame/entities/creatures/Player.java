@@ -1,6 +1,7 @@
 package dev.java2dgame.entities.creatures;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import dev.java2dgame.collectibles.CollectibleMenu;
@@ -9,11 +10,16 @@ import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.quests.Quest;
+import dev.java2dgame.states.State;
 import dev.java2dgame.ui.QuestGetUI;
+import dev.java2dgame.ui.UIObject;
 
 public class Player extends Creature {
 
 	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
+	
+	// Player progression variables.
+	private boolean perronBeat = false;
 	
 	private Animation idleAnim;
 	private Animation[] defaultAnims, sprintingAnims, tiredAnims, currentAnims;
@@ -59,7 +65,7 @@ public class Player extends Creature {
 		};
 		
 		currentAnims = defaultAnims;
-		giveQuest(Quest.talkToBreatonQuest, "none");
+		giveQuest(Quest.talkToBreatonQuest);
 		
 		isSprinting = false;
 		canInteract = false;
@@ -67,6 +73,10 @@ public class Player extends Creature {
 	}
 	
 	public void tick() {
+		// TODO Remove this after testing.
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_P))
+			State.setState(handler.getGame().getPerronFightState());
+		
 		getInput();
 		move();
 		handler.getGameCamera().centerOnEntity(this);
@@ -124,6 +134,15 @@ public class Player extends Creature {
 	}
 	
 	private void getInput() {
+		
+		// Checks for dialogue happening.
+		for (UIObject obj: handler.getMouseManager().getUiManager().getObjects()) {
+			if (obj.getClass().getSimpleName().equals("DialogueBoxUI")) {
+				xMove = 0;
+				yMove = 0;
+				return;
+			}
+		}
 		
 		if (collectibleMenu.isMenuActive()) { // Stops the player from moving if the collectible menu is active.
 			xMove = 0;
@@ -203,15 +222,10 @@ public class Player extends Creature {
 		this.canInteract = canInteract;
 	}
 
-	public void giveQuest(Quest quest, String showMsg) {
-		quest.setQuestGiven(true);
-		
-		if (showMsg.equals("show")) {
+	public void giveQuest(Quest quest) {
+		if (!quest.isQuestGiven())
 			handler.getMouseManager().getUiManager().addObject(new QuestGetUI(handler, quest.getQuestName()));
-		} else if (showMsg.equals("wait")) {
-			handler.getMouseManager().getUiManager().setObjectInQueue(new QuestGetUI(handler, quest.getQuestName()));
-			handler.getMouseManager().getUiManager().setIfItemInQueue(true);
-		}
+		quest.setQuestGiven(true);
 	}
 	
 	public void setSprinting(boolean sprinting) {
@@ -238,5 +252,12 @@ public class Player extends Creature {
 		this.isTired = isTired;
 	}
 	
+	public void setPerronBeat(boolean isBeat) {
+		this.perronBeat = isBeat;
+	}
+	
+	public boolean isPerronBeat() {
+		return perronBeat;
+	}
 	
 }

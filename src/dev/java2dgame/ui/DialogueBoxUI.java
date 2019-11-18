@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.gfx.Fonts;
+import dev.java2dgame.interfaces.PostDialogueEvent;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.utils.Utils;
 
@@ -20,14 +22,16 @@ public class DialogueBoxUI extends UIObject{
 	private boolean buildingBox;
 	private String fullText;
 	private ArrayList<ArrayList<String>> lines, displayLines;
+	private PostDialogueEvent pde;
 	private int currentLine, currentLetterIndex;
 	
-	public DialogueBoxUI(Handler handler, String text) {
+	public DialogueBoxUI(Handler handler, String text, PostDialogueEvent optionalPDE) {
 		// In this case these variables mean nothing to the super-class.
 		super(0, 0, 0, 0);
 		
 		this.handler = handler;
 		this.fullText = text;
+		this.pde = optionalPDE;
 		
 		// Adds an empty list to the display text which is the first list that gets written in.
 		this.displayLines = new ArrayList<ArrayList<String>>();
@@ -43,7 +47,7 @@ public class DialogueBoxUI extends UIObject{
 	}
 	
 	@Override
-	public void tick() {
+	public void tick(ListIterator<UIObject> it) {
 		
 		// only adds stuff onto the end of the box if the buildingBox variable is true.
 		if (buildingBox) {
@@ -139,5 +143,9 @@ public class DialogueBoxUI extends UIObject{
 	
 	public void setBuilding(boolean toWhat) {
 		buildingBox = toWhat;
+	}
+	
+	public PostDialogueEvent getPDE() {
+		return pde;
 	}
 }

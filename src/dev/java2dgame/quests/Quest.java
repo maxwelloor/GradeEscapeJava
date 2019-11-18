@@ -1,7 +1,11 @@
 package dev.java2dgame.quests;
 
+import dev.java2dgame.entities.Entity;
+import dev.java2dgame.entities.statics.Teacher;
 import dev.java2dgame.main.Handler;
+import dev.java2dgame.ui.DialogueBoxUI;
 import dev.java2dgame.ui.QuestCompleteUI;
+import dev.java2dgame.ui.ReadyForHandInUI;
 
 // TODO add quest functionality.
 
@@ -11,10 +15,10 @@ public abstract class Quest {
 	private static int numberOfQuests = 0;
 	private static Quest[] quests = new Quest[256];
 	
-	public static Quest placeholderQuest = new PlaceholderQuest();
 	public static Quest talkToBreatonQuest = new TalkToBreatonQuest();
 	public static Quest enterNewAreaQuest = new EnterNewAreaQuest();
 	public static Quest findMooresHairQuest = new FindMooresHairQuest();
+	public static Quest beatMrPerronQuest = new BeatMrPerronQuest();
 	
 	public static Quest[] getQuests() {
 		return quests;
@@ -25,14 +29,30 @@ public abstract class Quest {
 	}
 	
 	// Dynamic Stuff
-	protected boolean questCompleted = false, questGiven = false;
+	protected boolean questCompleted = false, questGiven = false, readyForHandIn = false, questHandedIn = false, handInQuest;
 	protected String qName, qDesc;
+	protected int teacherForHandIn;
 	
 	public Quest(String qName, String qDesc) {
 		this.qName = qName;
 		this.qDesc = qDesc;
+		this.handInQuest = false;
 		
 		this.questCompleted = false;
+		Quest.quests[Quest.numberOfQuests] = this;
+		Quest.numberOfQuests++;
+	}
+	
+	// This constructor is for quests that have to be handed in. The teacher id is 
+	// the id of the teacher that the quest is required to be handed into upon completion.
+	public Quest(String qName, String qDesc, int teacherId) {
+		this.qName = qName;
+		this.qDesc = qDesc;
+		
+		this.handInQuest = true;
+		this.questCompleted = false;
+		this.teacherForHandIn = teacherId;
+		
 		Quest.quests[Quest.numberOfQuests] = this;
 		Quest.numberOfQuests++;
 	}
@@ -54,8 +74,36 @@ public abstract class Quest {
 	public abstract void questReward();
 	
 	public void tick() {
-		if (isQuestRequirementFilled())
-			finished();
+		if (handInQuest) {
+			if (isQuestRequirementFilled() && !readyForHandIn) {
+				readyForHandIn = true;
+				handler.getMouseManager().getUiManager().addObject(new ReadyForHandInUI(handler, qName));
+			}
+			else if (readyForHandIn) {
+				
+				for (Entity e: handler.getWorld().getEntityManager().getEntities()) {
+					if (e.getClass().getSimpleName().equals("Teacher")) {
+						Teacher t = (Teacher) e;
+					
+						if (t.getTeacherId() == teacherForHandIn && t.isShowingDialogue() && !questHandedIn) {
+							// Sets it to the first index which should be the default teacher thanking for a quest.
+							DialogueBoxUI currentDB = t.getTeacherDialogues()[t.getCurrentDialogueIndex()];
+							handler.getMouseManager().getUiManager().removeObject(currentDB);
+							currentDB.setBuilding(false);
+							currentDB.reset();
+							
+							t.setCurrentDialogue(0);
+							handler.getMouseManager().getUiManager().getObjectsToAdd().add(t.getTeacherDialogues()[t.getCurrentDialogueIndex()]);
+							questHandedIn = true;
+							finished();
+						}
+					}
+				}
+			}
+		} else {
+			if (isQuestRequirementFilled())
+				finished();
+		}
 	}
 	
 	public void finished() {
