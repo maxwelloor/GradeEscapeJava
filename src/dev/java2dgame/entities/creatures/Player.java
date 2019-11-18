@@ -31,9 +31,9 @@ public class Player extends Creature {
 		super(handler, x, y);
 		
 		hitbox.x = 0;
-		hitbox.y = 48;
+		hitbox.y = 60;
 		hitbox.width = 44;
-		hitbox.height = 45;
+		hitbox.height = 33;
 		
 		collectibleMenu = new CollectibleMenu(handler);
 		

@@ -26,3 +26,4 @@ AreaSwitch 639 64 2
 Teacher 400 400 0
 WoodenTable 600 600 0
 MooresHair 250 300 0
+MoucksBall 250 340 0

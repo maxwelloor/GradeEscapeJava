@@ -2,7 +2,7 @@ package dev.java2dgame.collectibles;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ListIterator;
 
 import dev.java2dgame.main.Handler;
 
@@ -14,10 +14,12 @@ public class CollectibleManager {
 	public CollectibleManager(Handler handler) {
 		this.handler = handler;
 		this.collectibles = new ArrayList<Collectible>();
+		
+		Collectible.setHandler(handler);
 	}
 	
 	public void tick() {
-		Iterator<Collectible> iter = collectibles.iterator();
+		ListIterator<Collectible> iter = collectibles.listIterator();
 		
 		while (iter.hasNext()) {
 			Collectible c = iter.next();
@@ -34,7 +36,6 @@ public class CollectibleManager {
 	
 	public void addCollectible(Collectible col, int x, int y) {
 		col.setPos(x, y);
-		col.setHandler(handler);
 		collectibles.add(col);
 	}
 	

@@ -109,11 +109,13 @@ public class World {
 					entityManager.addEntity(new WoodenTable(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("ComputerMonitor")) {
 					entityManager.addEntity(new ComputerMonitor(handler, xOfObj, yOfObj));
-				}
+				} 
 				
 				// Collectibles.
 				if (nameOfObj.equals("MooresHair")) {
 					collectibleManager.addCollectible(Collectible.mooresHair, xOfObj, yOfObj);
+				} else if (nameOfObj.equals("MoucksBall")) {
+					collectibleManager.addCollectible(Collectible.moucksSoccerBall, xOfObj, yOfObj);
 				}
 				
 			} catch(ArrayIndexOutOfBoundsException e) {

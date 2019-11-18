@@ -21,7 +21,7 @@ public class FindMooresHairQuest extends Quest {
 
 	@Override
 	public void questReward() {
-		
+		handler.getWorld().getEntityManager().getPlayer().giveQuest(Quest.enterNewAreaQuest);
 	}
 
 }

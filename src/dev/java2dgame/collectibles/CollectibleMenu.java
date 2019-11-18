@@ -113,13 +113,17 @@ public class CollectibleMenu {
 				break;
 			
 			if (!c.isCollected()) {
-				g.drawString("???", startX + loops * 100, collectibleY + Fonts.getFontHeight(FONT) - 14);
+				g.drawString("???", startX + loops * 100, collectibleY + Fonts.getFontHeight(FONT) - 18);
 			} else {
-				c.renderMenuImage(g, startX + loops * 100, collectibleY);
+				c.renderMenuImage(g, startX + loops * 100,  collectibleY - 5);
 			}
 			
+			// Draws the selection box around the selection.
 			if (c == selectedCollectible) {
-				g.drawRect((startX + loops * 100) - 2, collectibleY, 64, 64);
+				for (int offset = -2; offset < 3; offset++) {
+					g.drawRect((startX + offset + loops * 100) - 2, collectibleY - 5, 64, 64);
+					g.drawRect((startX + loops * 100) - 2, collectibleY - 5+ offset, 64, 64);
+				}
 			}
 
 			loops++;

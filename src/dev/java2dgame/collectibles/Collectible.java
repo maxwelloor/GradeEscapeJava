@@ -5,10 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ListIterator;
 
 import dev.java2dgame.gfx.Fonts;
 import dev.java2dgame.main.Handler;
+import dev.java2dgame.ui.CollectiblePickupUI;
 import dev.java2dgame.utils.Utils;
 
 public class Collectible {
@@ -16,8 +17,9 @@ public class Collectible {
 	// COLLECTIBLES
 	
 	public static Collectible[] collectibles = new Collectible[256];
-	public static Collectible mooresHair = new Collectible(null, "Moore's Hair", "Collectible Desc: This legendary artifact has been gone since         before the current civilizations know, the fact that you have thismakes you one of the most dangerous people ever.");
-	public static Collectible pencil = new Collectible(null, "Pencil", "dolo");
+	public static Collectible mooresHair = new Collectible(null, "Mr. Moore's Hair", "Collectible Desc: This legendary artifact has been gone since         before the current civilizations know, the fact that you have thismakes you one of the most dangerous people ever.");
+	public static Collectible moucksSoccerBall = new Collectible(null, "Mr. Mouck's Soccer Ball", "Collectible Desc: Lost championship soccer ball of all time great    soccer player and coach Mr. Mouck.");
+	public static Collectible mrNickelsMovie = new Collectible(null, "Mr. Nickel's Favourite Movie", "Collectible Desc: Mr Nickel's favourite movie");
 	public static Collectible testCollectible = new Collectible(null, "Pencil", "dolo");
 	public static Collectible mathesonsJuul = new Collectible(null, "Pencil", "dolo");
 	public static Collectible ellisEar = new Collectible(null, "Pencil", "dolo");
@@ -28,9 +30,9 @@ public class Collectible {
 	
 	// DYNAMIC STUFF
 	
+	protected static Handler handler;
 	private static final int COLLECTIBLE_W = 32, COLLECTIBLE_H = 32;
 	private static int totalCollectibles = 0;	
-	private static Handler handler;
 	
 	private float x, y;
 	private String name, desc;
@@ -50,13 +52,13 @@ public class Collectible {
 		totalCollectibles++;
 	}
 	
-	public void tick(Iterator<Collectible> it) {
+	public void tick(ListIterator<Collectible> it) {
 		if (collected)
 			return;
 		
 		// If the player is touching the collectible
 		if (getHitbox().intersects(handler.getWorld().getEntityManager().getPlayer().getHitbox(0f, 0f))) {
-			it.remove();
+			handler.getMouseManager().getUiManager().addObject(new CollectiblePickupUI(handler, this.name));
 			collected = true;
 		}	
 	}
@@ -111,6 +113,10 @@ public class Collectible {
 	
 	public static void setHandler(Handler handler) {
 		Collectible.handler = handler;
+	}
+	
+	public Handler getHandler() {
+		return Collectible.handler;
 	}
 	
 	public Rectangle getHitbox() {

@@ -35,7 +35,7 @@ public class Teacher extends StaticEntity {
 					teacher.currentDialogue = 0;
 				}
 				
-			}), new DialogueBoxUI(handler, "Hey I'm a teacher nice to meet you. I need your help with something.", null), new DialogueBoxUI(handler, "Could you help me find Mr. Moores hair?", new PostDialogueEvent() {
+			}), new DialogueBoxUI(handler, "Hey I'm a teacher nice to meet you. I need your help with   something.", null), new DialogueBoxUI(handler, "Could you help me find Mr. Moores hair?", new PostDialogueEvent() {
 
 				@Override // The dialogue that gives the quest.
 				public void afterDialogue(Handler handler, Teacher teacher) {
