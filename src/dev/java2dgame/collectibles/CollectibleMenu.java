@@ -14,7 +14,7 @@ public class CollectibleMenu {
 	
 	public static final int MENU_W = 800, MENU_H = 600, LINE_THICKNESS = 5;
 	public static final Font FONT = Assets.collectible_menu_font, INFO_FONT = Assets.collectible_menu_info_font;
-	private static final String MENU_TITLE = "Collectibles";
+	private static final String MENU_TITLE = "Collectible's";
 	private static final Color PRIMARY_C = Color.DARK_GRAY, SECONDARY_C = Color.white, THIRD_C = Color.black;
 	
 	private Handler handler;
@@ -29,8 +29,8 @@ public class CollectibleMenu {
 		this.y = handler.getHeight() / 2 - MENU_H / 2;
 	}
 	
-	public void tick(Graphics g) {
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_E)) { // checks for the player trying to open the menu
+	public void tick() {
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_E) && !handler.getWorld().getEntityManager().getPlayer().getQuestMenu().isMenuOpen()) { // checks for the player trying to open the menu
 			if (active)
 				active = false;
 			else

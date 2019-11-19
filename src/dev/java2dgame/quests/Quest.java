@@ -93,7 +93,7 @@ public abstract class Quest {
 							currentDB.reset();
 							
 							t.setCurrentDialogue(0);
-							handler.getMouseManager().getUiManager().getObjectsToAdd().add(t.getTeacherDialogues()[t.getCurrentDialogueIndex()]);
+							handler.getMouseManager().getUiManager().addObject(t.getTeacherDialogues()[t.getCurrentDialogueIndex()]);
 							questHandedIn = true;
 							finished();
 						}

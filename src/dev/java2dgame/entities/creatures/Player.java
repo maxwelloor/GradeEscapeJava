@@ -10,6 +10,7 @@ import dev.java2dgame.gfx.Animation;
 import dev.java2dgame.gfx.Assets;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.quests.Quest;
+import dev.java2dgame.quests.QuestMenu;
 import dev.java2dgame.states.State;
 import dev.java2dgame.ui.QuestGetUI;
 import dev.java2dgame.ui.UIObject;
@@ -26,6 +27,7 @@ public class Player extends Creature {
 	
 	private boolean isSprinting, canInteract, staminaBarEmpty, isTired;
 	private CollectibleMenu collectibleMenu;
+	private QuestMenu questMenu;
 
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y);
@@ -36,6 +38,7 @@ public class Player extends Creature {
 		hitbox.height = 33;
 		
 		collectibleMenu = new CollectibleMenu(handler);
+		questMenu = new QuestMenu(handler);
 		
 		// Player idle animation.
 		idleAnim = new Animation(333, Assets.player_standing);
@@ -82,10 +85,14 @@ public class Player extends Creature {
 		handler.getGameCamera().centerOnEntity(this);
 		tickAnimations();
 		
+		// Menu Stuff
+		collectibleMenu.tick();
+		questMenu.tick();
+		// Menu stuff done.
+		
 		// TODO DELETE THIS WHEN DONE ITS FOR TESTING.
 		if (handler.getMouseManager().isLeftPressed()) {
-			//System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
-			System.out.println(handler.getMouseManager().getMouseX() + ", " + handler.getMouseManager().getMouseY());
+			System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
 		}
 		
 		// Quest stuff
@@ -110,6 +117,9 @@ public class Player extends Creature {
 			speed = Creature.DEFAULT_SPEED;
 			currentAnims = defaultAnims;
 		}
+		
+		this.w = getCurrentAnimationFrame(currentAnims).getWidth();
+		this.h = getCurrentAnimationFrame(currentAnims).getWidth();
 		
 		// Sprinting stuff over.
 		
@@ -178,12 +188,12 @@ public class Player extends Creature {
 		if (canInteract)
 			g.drawImage(Assets.interact_mark, (int) (x - handler.getGameCamera().getxOffset() + getCurrentAnimationFrame(currentAnims).getWidth()/2 - Assets.interact_mark.getWidth()/2), (int) (y - handler.getGameCamera().getyOffset()) - Assets.interact_mark.getHeight() - 10, null);
 		
-		collectibleMenu.tick(g);
 		g.drawImage(getCurrentAnimationFrame(currentAnims), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), null);
 	}
 	
 	public void afterRender(Graphics g) {
 		collectibleMenu.render(g);
+		questMenu.render(g);
 	}
 	
 	private void tickAnimations() {
@@ -258,6 +268,14 @@ public class Player extends Creature {
 	
 	public boolean isPerronBeat() {
 		return perronBeat;
+	}
+	
+	public CollectibleMenu getCollectibleMenu() {
+		return collectibleMenu;
+	}
+	
+	public QuestMenu getQuestMenu() {
+		return questMenu;
 	}
 	
 }
