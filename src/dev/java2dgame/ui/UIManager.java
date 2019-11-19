@@ -13,13 +13,11 @@ public class UIManager {
 	private UIObject objectInQueue;
 	private boolean queueHasItem = false;
 	private ArrayList<UIObject> objects;
-	protected ArrayList<UIObject> objectsToAdd;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
 		this.objectInQueue = null;
 		this.objects = new ArrayList<UIObject>();
-		this.objectsToAdd = new ArrayList<UIObject>();
 	}
 	
 	public void tick(ListIterator<UIObject> it) {
@@ -27,12 +25,6 @@ public class UIManager {
 			UIObject obj = it.next();
 			obj.tick(it);
 		}
-		
-		for (UIObject obj: objectsToAdd) {
-			addObject(obj);
-		}
-		
-		objectsToAdd.clear();
 	}
 	
 	public void render(Graphics g) {
@@ -61,7 +53,6 @@ public class UIManager {
 		if (obj.getClass().getSimpleName().equals("ReadyForHandInUI") || obj.getClass().getSimpleName().equals("QuestGetUI") || obj.getClass().getSimpleName().equals("QuestCompleteUI")) {
 			for (UIObject object: handler.getMouseManager().getUiManager().getObjects()) {
 				if (object.getClass().getSimpleName().equals("ReadyForHandInUI") || object.getClass().getSimpleName().equals("QuestGetUI") || object.getClass().getSimpleName().equals("QuestCompleteUI")) {
-					System.out.println("Item added to queue.");
 					objectInQueue = obj;
 					queueHasItem = true;
 					return;
@@ -75,10 +66,6 @@ public class UIManager {
 	
 	public void removeObject(UIObject obj) {
 		objects.remove(obj);
-	}
-	
-	public ArrayList<UIObject> getObjectsToAdd() {
-		return objectsToAdd;
 	}
 	
 	public void setObjectInQueue(UIObject obj) {

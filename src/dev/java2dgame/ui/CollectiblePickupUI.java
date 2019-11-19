@@ -22,16 +22,17 @@ public class CollectiblePickupUI extends UIObject {
 		super(0, 0, 0, 0);
 		this.handler = handler;
 		this.cName = cName;
+		this.framesAlive = 0;
 		
-		this.yOffset = -20;
+		this.yOffset = -10;
 	}
 
 	@Override
 	public void tick(ListIterator<UIObject> it) {
-		x = (handler.getWorld().getEntityManager().getPlayer().getX() - handler.getGameCamera().getxOffset() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(cName, FONT)/2) + 19;
+		x = (handler.getWorld().getEntityManager().getPlayer().getX() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(cName, FONT)/2) + 18;
 		
 		framesAlive++;
-		yOffset--;
+		yOffset -= 2;
 		
 		if (framesAlive >= FRAMES_TO_DISSAPEAR) {
 			it.remove();
