@@ -3,6 +3,8 @@ package dev.java2dgame.quests;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import dev.java2dgame.gfx.Assets;
@@ -12,13 +14,14 @@ import dev.java2dgame.main.Handler;
 public class QuestMenu {
 	
 	private static final int MENU_W = 800, MENU_H = 600, LINE_THICKNESS = 5;
-	private static final Font FONT = Assets.collectible_menu_font, INFO_FONT = Assets.collectible_menu_info_font;
+	private static final Font FONT = Assets.dialogue_font;
 	private static final String MENU_TITLE = "Quest's";
 	private static final Color PRIMARY_C = Color.DARK_GRAY, SECONDARY_C = Color.white, THIRD_C = Color.black;
 	
 	private Handler handler;
 	private boolean menuOpen;
-	private int x, y;
+	private int x, y, startingIndex = 0;
+	private Quest selectedQuest;
 	
 	public QuestMenu(Handler handler) {
 		this.handler = handler;
@@ -38,6 +41,23 @@ public class QuestMenu {
 		if (!menuOpen)
 			return;
 		
+		int temp_y = y + Fonts.getFontHeight(FONT) + 5;
+		
+		for (int loops = 0; loops < 5; loops++) {
+			int yOfString = (temp_y + 106 * loops);
+			System.out.println(yOfString);
+			int xOfString = x + 10;
+
+			Rectangle clickbox = new Rectangle(xOfString, yOfString, MENU_W/2, 106);
+			
+			if (handler.getMouseManager().isLeftPressed() && clickbox.contains(new Point(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY()))) {
+				if (Quest.getQuests()[startingIndex + loops] != null)
+					selectedQuest = Quest.getQuests()[startingIndex + loops];
+			}
+		}
+		
+		if (selectedQuest != null)
+			System.out.println(selectedQuest.getQuestName());
 	}
 	
 	public void render(Graphics g) {
@@ -72,6 +92,29 @@ public class QuestMenu {
 			for (int yOffset = 0; yOffset <= LINE_THICKNESS; yOffset++)
 				g.drawLine(x, yOfLine + yOffset, x + MENU_W/2, yOfLine + yOffset);
 		}
+		// Lines Over.
+		
+		// Quest Names.
+		temp_y = y + Fonts.getFontHeight(FONT) + 5 + 106;
+		
+		for (int loops = 0; loops < 5; loops++) {
+			int yOfString = (temp_y + 106 * loops) + 20;
+			
+			g.setFont(FONT);
+			
+			try {
+				g.drawString(Quest.getQuests()[startingIndex + loops].getQuestName(), x + 10, yOfString - Fonts.getFontHeight(FONT));
+				
+				if (selectedQuest == Quest.getQuests()[startingIndex + loops]) {
+					for (int offset = 0; offset < 5; offset++) {
+						g.drawRect(x + 8 + offset, yOfString + offset - Fonts.getFontAscent(FONT)*2 - 10, Fonts.getWidthOfString(Quest.getQuests()[startingIndex + loops].getQuestName(), FONT), Fonts.getFontHeight(FONT));
+					}
+				}
+			} catch (NullPointerException e) {
+				g.drawString("???", x + 168, yOfString - Fonts.getFontHeight(FONT) + 4);
+			}
+		}
+		// Quest Names Over.
 	}
 	
 	public boolean isMenuOpen() {

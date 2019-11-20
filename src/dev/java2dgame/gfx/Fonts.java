@@ -42,4 +42,15 @@ public class Fonts {
 		
 		return fm.getHeight();
 	}
+	
+	public static int getFontAscent(Font font) {
+		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		
+		Graphics g = img.createGraphics();
+		g.setFont(font);
+		
+		FontMetrics fm = g.getFontMetrics();
+		
+		return fm.getAscent();
+	}
 }

@@ -128,5 +128,7 @@ public abstract class Quest {
 		return qName;
 	}
 	
-	
+	public String getQuestDescription() {
+		return qDesc;
+	}	
 }
