@@ -29,7 +29,7 @@ public class CollectiblePickupUI extends UIObject {
 
 	@Override
 	public void tick(ListIterator<UIObject> it) {
-		x = (handler.getWorld().getEntityManager().getPlayer().getX() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(cName, FONT)/2) + 6;
+		x = (handler.getWorld().getEntityManager().getPlayer().getX() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(cName, FONT)/2) + 10;
 		
 		framesAlive++;
 		yOffset -= 2;
@@ -43,7 +43,7 @@ public class CollectiblePickupUI extends UIObject {
 	public void render(Graphics g) {
 		g.setFont(FONT);
 		g.setColor(Color.white);
-		g.drawString(cName, (int) x, (int) (handler.getWorld().getEntityManager().getPlayer().getY() + yOffset));
+		g.drawString(cName, (int) x, (int) (handler.getWorld().getEntityManager().getPlayer().getY() + yOffset - handler.getGameCamera().getyOffset()));
 	}
 
 	@Override

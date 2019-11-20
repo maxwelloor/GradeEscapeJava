@@ -3,6 +3,7 @@ package dev.java2dgame.entities.creatures;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import dev.java2dgame.collectibles.CollectibleMenu;
 import dev.java2dgame.entities.Entity;
@@ -18,9 +19,10 @@ import dev.java2dgame.ui.UIObject;
 public class Player extends Creature {
 
 	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
+	public static ArrayList<Integer> keysFound = new ArrayList<Integer>();
+	public static boolean perronBeat = false;
 	
 	// Player progression variables.
-	private boolean perronBeat = false;
 	
 	private Animation idleAnim;
 	private Animation[] defaultAnims, sprintingAnims, tiredAnims, currentAnims;
@@ -117,9 +119,6 @@ public class Player extends Creature {
 			speed = Creature.DEFAULT_SPEED;
 			currentAnims = defaultAnims;
 		}
-		
-		this.w = getCurrentAnimationFrame(currentAnims).getWidth();
-		this.h = getCurrentAnimationFrame(currentAnims).getHeight();
 		
 		// Sprinting stuff over.
 		
@@ -276,6 +275,10 @@ public class Player extends Creature {
 	
 	public QuestMenu getQuestMenu() {
 		return questMenu;
+	}
+	
+	public ArrayList<Integer> getKeysFound() {
+		return keysFound;
 	}
 	
 }

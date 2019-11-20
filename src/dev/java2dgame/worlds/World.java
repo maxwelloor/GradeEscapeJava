@@ -8,6 +8,7 @@ import dev.java2dgame.entities.EntityManager;
 import dev.java2dgame.entities.creatures.Player;
 import dev.java2dgame.entities.statics.AreaSwitch;
 import dev.java2dgame.entities.statics.ComputerMonitor;
+import dev.java2dgame.entities.statics.Key;
 import dev.java2dgame.entities.statics.Teacher;
 import dev.java2dgame.entities.statics.WoodenTable;
 import dev.java2dgame.entities.statics.WoodshopSaw;
@@ -109,7 +110,9 @@ public class World {
 					entityManager.addEntity(new WoodenTable(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("ComputerMonitor")) {
 					entityManager.addEntity(new ComputerMonitor(handler, xOfObj, yOfObj));
-				} 
+				} else if (nameOfObj.equals("Key")) {
+					entityManager.addEntity(new Key(handler, xOfObj, yOfObj, idOfObj));
+				}			
 				
 				// Collectibles.
 				if (nameOfObj.equals("MooresHair")) {
