@@ -7,7 +7,6 @@ import dev.java2dgame.ui.DialogueBoxUI;
 import dev.java2dgame.ui.QuestCompleteUI;
 import dev.java2dgame.ui.ReadyForHandInUI;
 
-// TODO add quest functionality.
 
 public abstract class Quest {
 	// Static Stuff
@@ -19,6 +18,9 @@ public abstract class Quest {
 	public static Quest enterNewAreaQuest = new EnterNewAreaQuest();
 	public static Quest findMooresHairQuest = new FindMooresHairQuest();
 	public static Quest beatMrPerronQuest = new BeatMrPerronQuest();
+	public static Quest findMrMoucksBallQuest = new FindMoucksBallQuest();
+	public static Quest placeHolder = new TalkToBreatonQuest();
+	public static Quest placeHolder2 = new TalkToBreatonQuest();
 	
 	public static Quest[] getQuests() {
 		return quests;

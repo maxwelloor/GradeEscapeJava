@@ -32,15 +32,34 @@ public class QuestMenu {
 	
 	public void tick() {
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_Q) && !handler.getWorld().getEntityManager().getPlayer().getCollectibleMenu().isMenuActive()) {
-			if (!menuOpen)
+			if (!menuOpen) {
 				menuOpen = true;
-			else
+				selectedQuest = null;
+			} else
 				menuOpen = false;
 		}
 		
 		if (!menuOpen)
 			return;
 		
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+			if (startingIndex > 0) {
+				startingIndex--;
+				System.out.println("Hyw");
+			}
+		} else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+			startingIndex++;
+			
+			for (int loops = 0; loops < 5; loops++) {
+				if (Quest.getQuests()[startingIndex + loops] == null) {
+					startingIndex--;
+					break;
+				}
+			}
+		}
+		
+		
+		// Checks for the user clicking on a quest.
 		int temp_y = y + Fonts.getFontHeight(FONT) + 5;
 		
 		for (int loops = 0; loops < 5; loops++) {
@@ -55,9 +74,6 @@ public class QuestMenu {
 					selectedQuest = Quest.getQuests()[startingIndex + loops];
 			}
 		}
-		
-		if (selectedQuest != null)
-			System.out.println(selectedQuest.getQuestName());
 	}
 	
 	public void render(Graphics g) {
@@ -103,7 +119,10 @@ public class QuestMenu {
 			g.setFont(FONT);
 			
 			try {
-				g.drawString(Quest.getQuests()[startingIndex + loops].getQuestName(), x + 10, yOfString - Fonts.getFontHeight(FONT));
+				if (Quest.getQuests()[startingIndex + loops].isQuestGiven())
+					g.drawString(Quest.getQuests()[startingIndex + loops].getQuestName(), x + 10, yOfString - Fonts.getFontHeight(FONT));
+				else
+					g.drawString("???", x + 168, yOfString - Fonts.getFontHeight(FONT));
 				
 				if (selectedQuest == Quest.getQuests()[startingIndex + loops]) {
 					for (int offset = 0; offset < 5; offset++) {

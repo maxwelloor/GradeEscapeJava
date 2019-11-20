@@ -154,7 +154,7 @@ public class Player extends Creature {
 			}
 		}
 		
-		if (collectibleMenu.isMenuActive()) { // Stops the player from moving if the collectible menu is active.
+		if (collectibleMenu.isMenuActive() || questMenu.isMenuOpen()) { // Stops the player from moving if the collectible menu is active.
 			xMove = 0;
 			yMove = 0;
 			return;

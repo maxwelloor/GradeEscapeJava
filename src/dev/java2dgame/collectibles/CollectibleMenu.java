@@ -31,9 +31,10 @@ public class CollectibleMenu {
 	
 	public void tick() {
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_E) && !handler.getWorld().getEntityManager().getPlayer().getQuestMenu().isMenuOpen()) { // checks for the player trying to open the menu
-			if (active)
+			if (active) {
 				active = false;
-			else
+				selectedCollectible = null;
+			} else
 				active = true;
 		}
 		
