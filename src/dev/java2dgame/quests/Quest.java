@@ -1,11 +1,16 @@
 package dev.java2dgame.quests;
 
+import java.util.ArrayList;
+
+import dev.java2dgame.collectibles.CollectibleMenu;
 import dev.java2dgame.entities.Entity;
 import dev.java2dgame.entities.statics.Teacher;
+import dev.java2dgame.gfx.Fonts;
 import dev.java2dgame.main.Handler;
 import dev.java2dgame.ui.DialogueBoxUI;
 import dev.java2dgame.ui.QuestCompleteUI;
 import dev.java2dgame.ui.ReadyForHandInUI;
+import dev.java2dgame.utils.Utils;
 
 
 public abstract class Quest {
@@ -34,11 +39,14 @@ public abstract class Quest {
 	protected boolean questCompleted = false, questGiven = false, readyForHandIn = false, questHandedIn = false, handInQuest;
 	protected String qName, qDesc;
 	protected int teacherForHandIn;
+	private ArrayList<String> displayDesc;
 	
 	public Quest(String qName, String qDesc) {
 		this.qName = qName;
 		this.qDesc = qDesc;
 		this.handInQuest = false;
+		
+		this.displayDesc = buildDescrption();
 		
 		this.questCompleted = false;
 		Quest.quests[Quest.numberOfQuests] = this;
@@ -51,6 +59,8 @@ public abstract class Quest {
 		this.qName = qName;
 		this.qDesc = qDesc;
 		
+		this.displayDesc = buildDescrption();
+		
 		this.handInQuest = true;
 		this.questCompleted = false;
 		this.teacherForHandIn = teacherId;
@@ -58,16 +68,6 @@ public abstract class Quest {
 		Quest.quests[Quest.numberOfQuests] = this;
 		Quest.numberOfQuests++;
 	}
-	
-	/*
-	 *  This will run in the constructor of this Quest class and return the UIObject version of the quest when
-	 *  the quest is made so that each quest can have some sort of UI in the side for the player to read with
-	 *  the qName and qDesc variables there for the player to see.
-	 */
-	
-	//public UIObject createQuestUIObj() {
-		
-	//}
 	
 	// An if statement that can be anything to check weather the quest has been completed.
 	public abstract boolean isQuestRequirementFilled();
@@ -114,12 +114,43 @@ public abstract class Quest {
 		questReward();
 	}
 	
+	private ArrayList<String> buildDescrption() {
+		
+		String[] fullTextArray = qDesc.split("");
+		
+		ArrayList<String> line = new ArrayList<String>();
+		ArrayList<String> lines = new ArrayList<String>();
+				
+		for (String character : fullTextArray) {
+			line.add(character);
+			
+			if (Fonts.getWidthOfString(Utils.arrayListToString(line), QuestMenu.INFO_FONT) > QuestMenu.MENU_W/2 - 50) {
+				// If the text width is to big then it finishes the line.
+				lines.add(Utils.arrayListToString(line));
+				line.clear();
+			}
+		}
+		// Adds the last line to the list
+		lines.add(Utils.arrayListToString(line));
+		line.clear();
+			
+		return lines;
+	}
+	
 	public boolean isQuestCompleted() {
 		return questCompleted;
 	}
 
 	public boolean isQuestGiven() {
 		return questGiven;
+	}
+	
+	public boolean isReadyForHandIn() {
+		return readyForHandIn;
+	}
+	
+	public boolean isHandInQuest() {
+		return handInQuest;
 	}
 
 	public void setQuestGiven(boolean questGiven) {
@@ -132,5 +163,9 @@ public abstract class Quest {
 	
 	public String getQuestDescription() {
 		return qDesc;
-	}	
+	}
+	
+	public ArrayList<String> getDisplayLines() {
+		return displayDesc;
+	}
 }

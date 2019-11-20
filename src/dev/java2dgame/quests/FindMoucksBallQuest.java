@@ -5,7 +5,7 @@ import dev.java2dgame.collectibles.Collectible;
 public class FindMoucksBallQuest extends Quest {
 
 	public FindMoucksBallQuest() {
-		super("Find Mr. Moucks Ball", "Mr mouck lost his legendary ball and he need is back. Can you help?");
+		super("Find Mr. Moucks Ball", "Quest Desc: Mr mouck lost his legendary ball and he need is back. Can you help?");
 	}
 
 	@Override

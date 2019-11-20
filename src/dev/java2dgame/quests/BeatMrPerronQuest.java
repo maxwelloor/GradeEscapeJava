@@ -3,7 +3,7 @@ package dev.java2dgame.quests;
 public class BeatMrPerronQuest extends Quest {
 
 	public BeatMrPerronQuest() {
-		super("Beat Mr. Perron", "You need to get the key Mr. Perron has by beating him in an arm wrestle. Can you do it?");
+		super("Beat Mr. Perron", "Quest Desc: You need to get the key Mr. Perron has by beating him in an arm wrestle. Can you do it?");
 	}
 
 	@Override

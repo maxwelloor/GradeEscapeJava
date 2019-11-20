@@ -13,7 +13,8 @@ import dev.java2dgame.main.Handler;
 
 public class QuestMenu {
 	
-	private static final int MENU_W = 800, MENU_H = 600, LINE_THICKNESS = 5;
+	protected static final int MENU_W = 800, MENU_H = 600, LINE_THICKNESS = 5;
+	protected static final Font INFO_FONT = Assets.collectible_menu_info_font;
 	private static final Font FONT = Assets.dialogue_font;
 	private static final String MENU_TITLE = "Quest's";
 	private static final Color PRIMARY_C = Color.DARK_GRAY, SECONDARY_C = Color.white, THIRD_C = Color.black;
@@ -45,7 +46,6 @@ public class QuestMenu {
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
 			if (startingIndex > 0) {
 				startingIndex--;
-				System.out.println("Hyw");
 			}
 		} else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
 			startingIndex++;
@@ -64,14 +64,14 @@ public class QuestMenu {
 		
 		for (int loops = 0; loops < 5; loops++) {
 			int yOfString = (temp_y + 106 * loops);
-			System.out.println(yOfString);
 			int xOfString = x + 10;
 
 			Rectangle clickbox = new Rectangle(xOfString, yOfString, MENU_W/2, 106);
 			
 			if (handler.getMouseManager().isLeftPressed() && clickbox.contains(new Point(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY()))) {
-				if (Quest.getQuests()[startingIndex + loops] != null)
+				if (Quest.getQuests()[startingIndex + loops] != null && Quest.getQuests()[startingIndex + loops].isQuestGiven()) {
 					selectedQuest = Quest.getQuests()[startingIndex + loops];
+				}
 			}
 		}
 	}
@@ -134,6 +134,33 @@ public class QuestMenu {
 			}
 		}
 		// Quest Names Over.
+		
+		// Quest Description stuff on right side.
+		
+		if (selectedQuest != null) {
+			
+			g.setFont(INFO_FONT);
+			g.drawString("Status: ", x + MENU_W/2 + 10, temp_y - 70);
+			
+			if (selectedQuest.isQuestGiven() && !selectedQuest.isQuestCompleted() && !selectedQuest.isReadyForHandIn()) {
+				g.setColor(Color.red);
+				g.drawString("Waiting For Completion.", x + MENU_W/2 + 10 + Fonts.getWidthOfString("Status: ", INFO_FONT), temp_y - 70);
+			} else if (selectedQuest.isQuestGiven() && !selectedQuest.isQuestCompleted() && selectedQuest.isReadyForHandIn() && selectedQuest.isHandInQuest()) {
+				g.setColor(Color.yellow);
+				g.drawString("Ready For Hand In.", x + MENU_W/2 + 10 + Fonts.getWidthOfString("Status: ", INFO_FONT), temp_y - 70);
+			} else if (selectedQuest.isQuestGiven() && selectedQuest.isQuestCompleted()) {
+				g.setColor(Color.green);
+				g.drawString("Quest Complete!", x + MENU_W/2 + 10 + Fonts.getWidthOfString("Status: ", INFO_FONT), temp_y - 70);
+			}
+			
+			int yToDraw = temp_y - 40;
+			g.setColor(Color.black);
+			
+			for (String line: selectedQuest.getDisplayLines()) {
+				g.drawString(line, x + MENU_W/2 + 10, yToDraw);
+				yToDraw += Fonts.getFontHeight(INFO_FONT);
+			}
+		}
 	}
 	
 	public boolean isMenuOpen() {

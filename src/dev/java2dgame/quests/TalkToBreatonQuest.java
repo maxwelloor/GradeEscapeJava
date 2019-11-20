@@ -6,7 +6,7 @@ import dev.java2dgame.entities.statics.Teacher;
 public class TalkToBreatonQuest extends Quest {
 
 	public TalkToBreatonQuest() {
-		super("Talk to Mr. Breaton", "You need to locate and talk to Mr. Breaton.");
+		super("Talk to Mr. Breaton", "Quest Desc: You need to locateand talk to Mr. Breaton.");
 	}
 
 	@Override

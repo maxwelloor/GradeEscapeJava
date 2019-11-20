@@ -5,7 +5,7 @@ import dev.java2dgame.collectibles.Collectible;
 public class FindMooresHairQuest extends Quest {
 
 	public FindMooresHairQuest() {
-		super("Find Mr. Moores Hair", "You need to search the school to find moores lost headtop.", 0);
+		super("Find Mr. Moores Hair", "Quest Desc: You need to search the school to find moores lost headtop.", 0);
 	}
 
 	@Override

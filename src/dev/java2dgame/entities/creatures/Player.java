@@ -119,7 +119,7 @@ public class Player extends Creature {
 		}
 		
 		this.w = getCurrentAnimationFrame(currentAnims).getWidth();
-		this.h = getCurrentAnimationFrame(currentAnims).getWidth();
+		this.h = getCurrentAnimationFrame(currentAnims).getHeight();
 		
 		// Sprinting stuff over.
 		
