@@ -29,7 +29,7 @@ public class AreaSwitch extends StaticEntity {
 	@Override
 	public void tick() {
 		
-		boolean doorLocked = false, keyHad = false;
+		boolean doorLocked = false;
 		
 		// If the player interacts with this
 		if (this.checkForPlayerInteract(handler.getWorld().getEntityManager().getPlayer())) {
@@ -37,8 +37,10 @@ public class AreaSwitch extends StaticEntity {
 				if (num == sendTo) {
 					doorLocked = true;
 					for (int key: handler.getWorld().getEntityManager().getPlayer().getKeysFound()) {
-						if (key == sendTo)
+						if (key == sendTo) {
 							changeWorld();
+							return;
+						}
 					}
 				}
 			}

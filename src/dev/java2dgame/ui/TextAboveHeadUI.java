@@ -11,7 +11,7 @@ import dev.java2dgame.main.Handler;
 
 public class TextAboveHeadUI extends UIObject {
 	
-	public static final int FRAMES_TO_DISSAPEAR = 30;
+	public static final int FRAMES_TO_DISSAPEAR = 60;
 	private static final Font FONT = Assets.collectible_menu_info_font;
 	
 	private String text;
