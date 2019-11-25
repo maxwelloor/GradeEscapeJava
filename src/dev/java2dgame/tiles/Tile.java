@@ -36,9 +36,7 @@ public class Tile {
 	public static Tile gymWallTopRight = new GymWallTopRightTile();
 	public static Tile gymWallBotLeft = new GymWallBotLeftTile();
 	public static Tile gymWallBotRight = new GymWallBotRightTile();
-	
-	
-	
+	public static Tile audChairTile = new AudChairTile();
 	
 	// CLASS STUFF
 	
