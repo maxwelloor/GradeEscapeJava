@@ -58,3 +58,5 @@
 AreaSwitch 1279 1087 2 0 0
 AreaSwitch 1350 1087 2 0 0
 AreaSwitch 1790 2624 3 0 0
+AreaDoor 2024 2491 50 0 0
+Key 2024 2600 50 0 0

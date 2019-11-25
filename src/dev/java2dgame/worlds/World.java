@@ -6,6 +6,7 @@ import dev.java2dgame.collectibles.Collectible;
 import dev.java2dgame.collectibles.CollectibleManager;
 import dev.java2dgame.entities.EntityManager;
 import dev.java2dgame.entities.creatures.Player;
+import dev.java2dgame.entities.statics.AreaDoor;
 import dev.java2dgame.entities.statics.AreaSwitch;
 import dev.java2dgame.entities.statics.AreaSwitchExact;
 import dev.java2dgame.entities.statics.ComputerMonitor;
@@ -126,6 +127,8 @@ public class World {
 					entityManager.addEntity(new Key(handler, xOfObj, yOfObj, idOfObj));
 				} else if (nameOfObj.equals("AreaSwitchExact")) {
 					entityManager.addEntity(new AreaSwitchExact(handler, xOfObj, yOfObj, idOfObj, extraParam1, extraParam2));
+				} else if (nameOfObj.equals("AreaDoor")) {
+					entityManager.addEntity(new AreaDoor(handler, xOfObj, yOfObj, idOfObj));
 				}
 				
 				// Collectibles.

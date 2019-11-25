@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import dev.java2dgame.entities.creatures.Player;
+import dev.java2dgame.entities.statics.AreaDoor;
 import dev.java2dgame.main.Handler;
 
 public abstract class Entity {
@@ -30,7 +31,7 @@ public abstract class Entity {
 	
 	public abstract void render(Graphics g);
 	
-	public boolean checkEntityCollisions(float xOffset, float yOffset){
+	public boolean checkEntityCollisions(float xOffset, float yOffset) {
 		for(Entity e : handler.getWorld().getEntityManager().getEntities()){
 			if(e.equals(this))
 				continue;
@@ -38,6 +39,12 @@ public abstract class Entity {
 			
 			if(e.getClass().getSimpleName().equals("AreaSwitch"))
 				continue;
+			if(e.getClass().getSimpleName().equals("AreaDoor")) {
+				AreaDoor ad = (AreaDoor) e;
+				if (!ad.isDoorLocked())
+					continue;
+			}
+				
 			
 			// Exceptions over.
 			
