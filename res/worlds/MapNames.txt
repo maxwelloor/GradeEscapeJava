@@ -1,0 +1,3 @@
+DownstairsHallways = 1
+Aud = 2
+DownstairsBoysBath = 3

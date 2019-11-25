@@ -7,6 +7,7 @@ import dev.java2dgame.collectibles.CollectibleManager;
 import dev.java2dgame.entities.EntityManager;
 import dev.java2dgame.entities.creatures.Player;
 import dev.java2dgame.entities.statics.AreaSwitch;
+import dev.java2dgame.entities.statics.AreaSwitchExact;
 import dev.java2dgame.entities.statics.ComputerMonitor;
 import dev.java2dgame.entities.statics.Key;
 import dev.java2dgame.entities.statics.Teacher;
@@ -38,6 +39,15 @@ public class World {
 		
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
+	}
+	
+	public World(Handler handler, String path, int playerX, int playerY) {
+		this.handler = handler;
+		worldNumber = Integer.parseInt(path);
+		entityManager = new EntityManager(handler, new Player(handler, playerX, playerY));
+		collectibleManager = new CollectibleManager(handler);
+		
+		loadWorld(path);
 	}
 	
 	public void tick() {
@@ -98,6 +108,8 @@ public class World {
 				int xOfObj = Integer.valueOf(tokens[firstEntityI + 1]);
 				int yOfObj = Integer.valueOf(tokens[firstEntityI + 2]);
 				int idOfObj = Integer.valueOf(tokens[firstEntityI + 3]);
+				int extraParam1 = Integer.valueOf(tokens[firstEntityI + 4]);
+				int extraParam2 = Integer.valueOf(tokens[firstEntityI + 5]);
 				
 				// Entities.
 				if (nameOfObj.equals("WoodshopSaw")) {
@@ -112,7 +124,9 @@ public class World {
 					entityManager.addEntity(new ComputerMonitor(handler, xOfObj, yOfObj));
 				} else if (nameOfObj.equals("Key")) {
 					entityManager.addEntity(new Key(handler, xOfObj, yOfObj, idOfObj));
-				}			
+				} else if (nameOfObj.equals("AreaSwitchExact")) {
+					entityManager.addEntity(new AreaSwitchExact(handler, xOfObj, yOfObj, idOfObj, extraParam1, extraParam2));
+				}
 				
 				// Collectibles.
 				if (nameOfObj.equals("MooresHair")) {
@@ -124,7 +138,7 @@ public class World {
 			} catch(ArrayIndexOutOfBoundsException e) {
 				listOver = true;
 			}
-			firstEntityI += 4;
+			firstEntityI += 6;
 		}
 	}
 	

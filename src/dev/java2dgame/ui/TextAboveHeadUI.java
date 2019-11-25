@@ -26,7 +26,7 @@ public class TextAboveHeadUI extends UIObject {
 	
 	@Override
 	public void tick(ListIterator<UIObject> it) {
-		x = (handler.getWorld().getEntityManager().getPlayer().getX() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(text, FONT)/2) + 16;
+		x = (handler.getWorld().getEntityManager().getPlayer().getX() + handler.getWorld().getEntityManager().getPlayer().getW()/2 - Fonts.getWidthOfString(text, FONT)/2) + 19 - handler.getGameCamera().getxOffset();
 		
 		framesAlive++;
 		
@@ -38,7 +38,7 @@ public class TextAboveHeadUI extends UIObject {
 	@Override
 	public void render(Graphics g) {
 		g.setFont(FONT);
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.drawString(text, (int) x, (int) (handler.getWorld().getEntityManager().getPlayer().getY() - 20 - handler.getGameCamera().getyOffset()));
 	}
 

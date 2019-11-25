@@ -21,7 +21,7 @@ public class GameState extends State{
 		handler.getMouseManager().getUiManager().addObject(new SprintBarUI(handler));
 		Tile.printIds();
 		
-		handler.setWorld(new World(handler, "1"));
+		handler.setWorld(new World(handler, "3", 600, 800));
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import dev.java2dgame.ui.UIObject;
 
 public class Player extends Creature {
 
-	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
+	private static final float DEFAULT_SPRINT_SPEED = 40.5f, DEFAULT_TIRED_SPEED = 2.0f;
 	public static ArrayList<Integer> keysFound = new ArrayList<Integer>();
 	public static boolean perronBeat = false;
 	
@@ -70,7 +70,7 @@ public class Player extends Creature {
 		};
 		
 		currentAnims = defaultAnims;
-		giveQuest(Quest.talkToBreatonQuest);
+		giveQuest(Quest.goToTheAud);
 		
 		isSprinting = false;
 		canInteract = false;
@@ -94,7 +94,7 @@ public class Player extends Creature {
 		
 		// TODO DELETE THIS WHEN DONE ITS FOR TESTING.
 		if (handler.getMouseManager().isLeftPressed()) {
-			System.out.println((handler.getMouseManager().getMouseX() - handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() - handler.getGameCamera().getyOffset()));
+			System.out.println((handler.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset()) + ", " + (handler.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()));
 		}
 		
 		// Quest stuff

@@ -111,6 +111,6 @@ public class Assets {
 		gym_wall_topright = ImageLoader.loadImage("/sprites/tiles/gym_wall_topright.png");
 		gym_wall_botleft = ImageLoader.loadImage("/sprites/tiles/gym_wall_botleft.png");
 		gym_wall_botright = ImageLoader.loadImage("/sprites/tiles/gym_wall_botright.png");
-		aud_chair = ImageLoader.loadImage("/sprites/tiles/aud_char.png");
+		aud_chair = ImageLoader.loadImage("/sprites/tiles/aud_chair.png");
 	}
 }

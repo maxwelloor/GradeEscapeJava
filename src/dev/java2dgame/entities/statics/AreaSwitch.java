@@ -9,7 +9,7 @@ import dev.java2dgame.worlds.World;
 
 public class AreaSwitch extends StaticEntity {
 	
-	private static int[] lockedAreas = {2, 3};
+	private static int[] lockedAreas = {};
 	
 	private int sendTo;
 
@@ -61,6 +61,10 @@ public class AreaSwitch extends StaticEntity {
 	@Override
 	public void render(Graphics g) {
 		
+	}
+	
+	public static int[] getLockedAreas() {
+		return lockedAreas;
 	}
 
 }
