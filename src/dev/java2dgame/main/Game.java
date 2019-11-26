@@ -71,7 +71,7 @@ public class Game implements Runnable {
 		perronFightState = new PerronFightState(handler);
 		
 		Quest.setHandler(handler);
-		State.setState(gameState);
+		State.setState(menuState);
 	}
 	
 	public void tick() {

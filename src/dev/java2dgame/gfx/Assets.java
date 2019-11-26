@@ -34,7 +34,8 @@ public class Assets {
 	public static BufferedImage[] player_down, player_up, player_right, player_left, player_standing;
 	
 	// UI
-	public static BufferedImage interact_mark;
+	public static BufferedImage interact_mark, title_image, start_button_f1, start_button_f2;
+	public static BufferedImage[] start_button;
 	
 	//SPRITE SHEETS
 	public static SpriteSheet tileSheet, playerRunDownSheet, playerStandingSheet, playerRunRightSheet,
@@ -79,6 +80,10 @@ public class Assets {
 		
 		// UI
 		interact_mark = ImageLoader.loadImage("/sprites/ui/interact_mark.png");
+		start_button_f2 = ImageLoader.loadImage("/sprites/ui/start_button_f1.png");
+		start_button_f1 = ImageLoader.loadImage("/sprites/ui/start_button_f2.png");
+		title_image = ImageLoader.loadImage("/sprites/ui/title_image.png");
+		start_button = new BufferedImage[] {start_button_f1, start_button_f2};
 		
 		// Tile stuff.
 		tileSheet = new SpriteSheet("/sprites/tiles/tilesheet.png");
