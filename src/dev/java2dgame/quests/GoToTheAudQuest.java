@@ -3,7 +3,7 @@ package dev.java2dgame.quests;
 public class GoToTheAudQuest extends Quest {
 
 	public GoToTheAudQuest() {
-		super("Go to the Auditorium", "You got an announcemnt to gothere. Better be fast!");
+		super("Go to the Aud", "You got an announcemnt to gothere. Better be fast!");
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import dev.java2dgame.ui.UIObject;
 
 public class Player extends Creature {
 
-	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 2.0f;
+	private static final float DEFAULT_SPRINT_SPEED = 4.5f, DEFAULT_TIRED_SPEED = 3.0f;
 	public static ArrayList<Integer> keysFound = new ArrayList<Integer>();
 	public static boolean perronBeat = false;
 	
