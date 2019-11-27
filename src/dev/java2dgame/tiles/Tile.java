@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-	
 	// STATIC STUFF
 	
 	public static Tile[] tiles = new Tile[256];
@@ -16,9 +15,9 @@ public class Tile {
 	public static Tile classFloorTile2 = new ClassroomFloorTile2();
 	public static Tile classFloorTile3 = new ClassroomFloorTile3();
 	public static Tile hallFloorTile = new HallFloorTile();
-	public static Tile frontWallTile = new FrontWallTile();
-	public static Tile rightWallTile = new RightWallTile();
-	public static Tile leftWallTile = new LeftWallTile();
+	public static Tile frontHallWallTile = new HallWallFrontTile();
+	public static Tile rightHallWallTile = new HallWallRightTile();
+	public static Tile leftHallWallTile = new HallWallLeftTile();
 	public static Tile frontDoorTile = new FrontDoorTile();
 	public static Tile shelfWallTile = new ShelfWallTile();
 	public static Tile whiteboardWallTile = new WhiteboardWallTile();
@@ -37,6 +36,12 @@ public class Tile {
 	public static Tile gymWallBotLeft = new GymWallBotLeftTile();
 	public static Tile gymWallBotRight = new GymWallBotRightTile();
 	public static Tile audChairTile = new AudChairTile();
+	public static Tile toiletTile = new ToiletTile();
+	public static Tile downHallWallTile = new HallWallDownTile();
+	public static Tile hallTopLeftTile = new HallWallTopLeftTile();
+	public static Tile hallBotLeftTile = new HallWallBotLeftTile();
+	public static Tile hallTopRightTile = new HallWallTopRightTile();
+	public static Tile hallBotRightTile = new HallWallBotRightTile();
 	
 	// CLASS STUFF
 	

@@ -44,6 +44,8 @@ public abstract class Entity {
 				if (!ad.isDoorLocked())
 					continue;
 			}
+			if(e.getClass().getSimpleName().equals("AreaSwitchExact"))
+				continue;
 				
 			
 			// Exceptions over.

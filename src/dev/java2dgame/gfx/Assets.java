@@ -19,7 +19,8 @@ public class Assets {
 	classroom_floor3, front_wall, left_wall, right_wall, shelf_wall, whiteboard_wall, 
 	closed_window, open_window, bookshelf1, bookshelf2, lockers, door, bathroom_floor,
 	aud_stage, gym_wall_topleft, gym_wall_topright, gym_wall_botleft, gym_wall_botright,
-	aud_chair;
+	aud_chair, toilet, hall_wall_right, hall_wall_left, hall_wall_front, hall_wall_down,
+	hall_wall_top_left, hall_wall_top_right, hall_wall_bot_left, hall_wall_bot_right;
 	// TILES DONE
 	
 	// STATIC ENTITIES
@@ -117,5 +118,14 @@ public class Assets {
 		gym_wall_botleft = ImageLoader.loadImage("/sprites/tiles/gym_wall_botleft.png");
 		gym_wall_botright = ImageLoader.loadImage("/sprites/tiles/gym_wall_botright.png");
 		aud_chair = ImageLoader.loadImage("/sprites/tiles/aud_chair.png");
+		toilet = ImageLoader.loadImage("/sprites/tiles/toilet.png");
+		//hall_wall_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_left.png");
+		//hall_wall_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_right.png");
+		hall_wall_front = ImageLoader.loadImage("/sprites/tiles/hall_wall_front.png");
+		//hall_wall_down = ImageLoader.loadImage("/sprites/tiles/hall_wall_down.png");
+		hall_wall_top_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_top_left.png");
+		hall_wall_top_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_top_right.png");
+		hall_wall_bot_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_bot_left.png");
+		hall_wall_bot_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_bot_right.png");
 	}
 }
