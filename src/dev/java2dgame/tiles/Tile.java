@@ -47,6 +47,10 @@ public class Tile {
 	public static Tile hallDoorFrontTile = new HallDoorFrontTile();
 	public static Tile hallDoorDownTile = new HallDoorDownTile();
 	public static Tile urinalTile = new UrinalTile();
+	public static Tile bathWallUpTile = new BathWallUpTile();
+	public static Tile bathWallDownTile = new BathWallDownTile();
+	public static Tile bathWallRightTile = new BathWallRightTile();
+	public static Tile bathWallLeftTile = new BathWallLeftTile();
 	
 	// CLASS STUFF
 	

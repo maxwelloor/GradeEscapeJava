@@ -21,7 +21,8 @@ public class Assets {
 	aud_stage, gym_wall_topleft, gym_wall_topright, gym_wall_botleft, gym_wall_botright,
 	aud_chair, toilet, hall_wall_right, hall_wall_left, hall_wall_front, hall_wall_bottom,
 	hall_wall_top_left, hall_wall_top_right, hall_wall_bot_left, hall_wall_bot_right,
-	urinal, hall_door_right, hall_door_left, hall_door_front, hall_door_down;
+	urinal, hall_door_right, hall_door_left, hall_door_front, hall_door_down,
+	bath_wall_up, bath_wall_left, bath_wall_right, bath_wall_down;
 	// TILES DONE
 	
 	// STATIC ENTITIES
@@ -131,5 +132,10 @@ public class Assets {
 		hall_door_front = ImageLoader.loadImage("/sprites/tiles/hall_door_left.png");
 		hall_door_down = ImageLoader.loadImage("/sprites/tiles/hall_door_down.png");
 		urinal = ImageLoader.loadImage("/sprites/tiles/urinal.png");
+		bath_wall_up = ImageLoader.loadImage("/sprites/tiles/bath_wall_up.png");
+		bath_wall_down = ImageLoader.loadImage("/sprites/tiles/bath_wall_down.png");
+		bath_wall_left = ImageLoader.loadImage("/sprites/tiles/bath_wall_left.png");
+		bath_wall_up = ImageLoader.loadImage("/sprites/tiles/bath_wall_up.png");
+		bath_wall_right = ImageLoader.loadImage("/sprites/tiles/bath_wall_right.png");
 	}
 }
