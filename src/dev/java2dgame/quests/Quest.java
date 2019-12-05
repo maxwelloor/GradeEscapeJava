@@ -19,9 +19,9 @@ public abstract class Quest {
 	private static int numberOfQuests = 0;
 	private static Quest[] quests = new Quest[256];
 	
+	public static Quest goToTheAud = new GoToTheAudQuest();
 	public static Quest talkToBreatonQuest = new TalkToBreatonQuest();
 	public static Quest enterNewAreaQuest = new EnterNewAreaQuest();
-	public static Quest goToTheAud = new GoToTheAudQuest();
 	public static Quest findMooresHairQuest = new FindMooresHairQuest();
 	public static Quest beatMrPerronQuest = new BeatMrPerronQuest();
 	public static Quest findMrMoucksBallQuest = new FindMoucksBallQuest();

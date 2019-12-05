@@ -62,7 +62,7 @@ public class SprintBarUI extends UIObject {
 		
 		g.fillRect((int) x, greenBarY, SPRINT_BAR_WIDTH, barHeight);
 		
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		for (int offset = 0; offset < LINE_THICKNESS; offset++) {
 			g.drawRect((int) (x + offset), (int) (y + offset), SPRINT_BAR_WIDTH, SPRINT_BAR_HEIGHT_DEFAULT);
 		}

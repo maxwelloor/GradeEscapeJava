@@ -28,11 +28,6 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	//States
-	private State gameState;
-	private State menuState;
-	private State perronFightState;
-	
 	// Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
@@ -66,12 +61,8 @@ public class Game implements Runnable {
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
 		
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
-		perronFightState = new PerronFightState(handler);
-		
 		Quest.setHandler(handler);
-		State.setState(menuState);
+		State.setState(handler.getGame().getMenuState());
 	}
 	
 	public void tick() {
@@ -176,15 +167,15 @@ public class Game implements Runnable {
 	}
 
 	public State getGameState() {
-		return gameState;
+		return new GameState(handler);
 	}
 
 	public State getMenuState() {
-		return menuState;
+		return new MenuState(handler);
 	}
 
 	public State getPerronFightState() {
-		return perronFightState;
+		return new PerronFightState(handler);
 	}
 	
 }

@@ -21,7 +21,4 @@ public class GoToTheAudQuest extends Quest {
 	public void questReward() {
 		
 	}
-	
-	
-
 }

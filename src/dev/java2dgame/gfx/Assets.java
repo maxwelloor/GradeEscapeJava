@@ -17,10 +17,11 @@ public class Assets {
 	public static BufferedImage nothing, hall_floor, aud_floor, gym_floor,
 	gym_wall_front, gym_wall_right, gym_wall_left, classroom_floor1, classroom_floor2,
 	classroom_floor3, front_wall, left_wall, right_wall, shelf_wall, whiteboard_wall, 
-	closed_window, open_window, bookshelf1, bookshelf2, lockers, door, bathroom_floor,
+	closed_window, open_window, bookshelf1, bookshelf2, lockers, bathroom_floor,
 	aud_stage, gym_wall_topleft, gym_wall_topright, gym_wall_botleft, gym_wall_botright,
-	aud_chair, toilet, hall_wall_right, hall_wall_left, hall_wall_front, hall_wall_down,
-	hall_wall_top_left, hall_wall_top_right, hall_wall_bot_left, hall_wall_bot_right;
+	aud_chair, toilet, hall_wall_right, hall_wall_left, hall_wall_front, hall_wall_bottom,
+	hall_wall_top_left, hall_wall_top_right, hall_wall_bot_left, hall_wall_bot_right,
+	urinal, hall_door_right, hall_door_left, hall_door_front, hall_door_down;
 	// TILES DONE
 	
 	// STATIC ENTITIES
@@ -94,10 +95,8 @@ public class Assets {
 		classroom_floor1 = tileSheet.crop(0, tHeight * 2, tWidth, tHeight);
 		classroom_floor2 = tileSheet.crop(tWidth, 0, tWidth, tHeight);
 		classroom_floor3 = tileSheet.crop(tWidth, tHeight, tWidth, tHeight);
-		door = tileSheet.crop(tWidth, tHeight * 2, tWidth, tHeight);
 		aud_floor = tileSheet.crop(tWidth * 2, 0, tWidth, tHeight);
 		gym_floor = tileSheet.crop(tWidth * 2, tHeight, tWidth, tHeight);
-		lockers = tileSheet.crop(tWidth * 3, tHeight, tWidth, tHeight);
 		nothing = tileSheet.crop(tWidth * 3, tHeight * 2, tWidth, tHeight);
 		front_wall = tileSheet.crop(tWidth * 4, 0, tWidth, tHeight);
 		left_wall = tileSheet.crop(tWidth * 4, tHeight, tWidth, tHeight);
@@ -119,13 +118,18 @@ public class Assets {
 		gym_wall_botright = ImageLoader.loadImage("/sprites/tiles/gym_wall_botright.png");
 		aud_chair = ImageLoader.loadImage("/sprites/tiles/aud_chair.png");
 		toilet = ImageLoader.loadImage("/sprites/tiles/toilet.png");
-		//hall_wall_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_left.png");
-		//hall_wall_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_right.png");
+		hall_wall_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_left.png");
+		hall_wall_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_right.png");
 		hall_wall_front = ImageLoader.loadImage("/sprites/tiles/hall_wall_front.png");
-		//hall_wall_down = ImageLoader.loadImage("/sprites/tiles/hall_wall_down.png");
+		hall_wall_bottom = ImageLoader.loadImage("/sprites/tiles/hall_wall_bottom.png");
 		hall_wall_top_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_top_left.png");
 		hall_wall_top_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_top_right.png");
 		hall_wall_bot_left = ImageLoader.loadImage("/sprites/tiles/hall_wall_bot_left.png");
 		hall_wall_bot_right = ImageLoader.loadImage("/sprites/tiles/hall_wall_bot_right.png");
+		hall_door_left = ImageLoader.loadImage("/sprites/tiles/hall_door_left.png");
+		hall_door_right = ImageLoader.loadImage("/sprites/tiles/hall_door_right.png");
+		hall_door_front = ImageLoader.loadImage("/sprites/tiles/hall_door_left.png");
+		hall_door_down = ImageLoader.loadImage("/sprites/tiles/hall_door_down.png");
+		urinal = ImageLoader.loadImage("/sprites/tiles/urinal.png");
 	}
 }

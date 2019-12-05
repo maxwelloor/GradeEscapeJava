@@ -18,10 +18,10 @@ public class Tile {
 	public static Tile frontHallWallTile = new HallWallFrontTile();
 	public static Tile rightHallWallTile = new HallWallRightTile();
 	public static Tile leftHallWallTile = new HallWallLeftTile();
-	public static Tile frontDoorTile = new FrontDoorTile();
+	public static Tile frontDoorTile = new HallDoorFrontTile();
 	public static Tile shelfWallTile = new ShelfWallTile();
 	public static Tile whiteboardWallTile = new WhiteboardWallTile();
-	public static Tile lockerTile = new LockerTile();
+	public static Tile lockerTile = new FrontLockerTile();
 	public static Tile bookshelfTile1 = new BookshelfTile1();
 	public static Tile bookshelfTile2 = new BookshelfTile2();
 	public static Tile openWindowTile = new OpenWindowTile();
@@ -42,6 +42,11 @@ public class Tile {
 	public static Tile hallBotLeftTile = new HallWallBotLeftTile();
 	public static Tile hallTopRightTile = new HallWallTopRightTile();
 	public static Tile hallBotRightTile = new HallWallBotRightTile();
+	public static Tile hallDoorRightTile = new HallDoorRightTile();
+	public static Tile hallDoorLeftTile = new HallDoorLeftTile();
+	public static Tile hallDoorFrontTile = new HallDoorFrontTile();
+	public static Tile hallDoorDownTile = new HallDoorDownTile();
+	public static Tile urinalTile = new UrinalTile();
 	
 	// CLASS STUFF
 	
